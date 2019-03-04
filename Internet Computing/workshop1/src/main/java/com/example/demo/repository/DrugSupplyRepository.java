@@ -9,4 +9,14 @@ public class DrugSupplyRepository {
 		return null;
 	}
 
+	public DrugSupply delete(DrugSupply supply) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public DrugSupply find(DrugSupply supply) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

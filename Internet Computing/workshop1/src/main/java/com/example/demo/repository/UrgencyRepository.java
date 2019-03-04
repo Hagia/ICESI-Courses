@@ -9,7 +9,8 @@ public class UrgencyRepository {
 	
 	private HashMap<String, Urgency> listUrgency;
 	
-	public void Create(Urgency drug) {
+	public Urgency Create(Urgency drug) {
+		return null;
 
 	}
 

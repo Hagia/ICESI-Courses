@@ -4,11 +4,11 @@ import java.util.HashMap;
 
 import com.example.demo.model.Drug;
 import com.example.demo.model.DrugInventary;
-import com.example.demo.repository.DrugInvetaryRepository;
+import com.example.demo.repository.DrugInventaryRepository;
 
 public class DrugInventaryService {
 	
-	private DrugInvetaryRepository inventaryRepository;
+	private DrugInventaryRepository inventaryRepository;
 	
 	public void Create(DrugInventary drug) {
 		
