@@ -7,19 +7,18 @@ import lombok.*;
 @Data
 public class Drug {
 
+	@NonNull
 	private String id;
+	@NonNull
 	private String name;
+	@NonNull
 	private String genericName;
+	@NonNull
 	private String lab;
+	@NonNull
 	private String useMode;
+	@NonNull
 	private String indications;
+	
 	private String warnings;
-	
-	@NonNull
-	private List<DrugSupply> supplies;
-	
-	private List<DrugInventary> inventaries;
-	
-	@NonNull
-	private Pacient pacient;
 }

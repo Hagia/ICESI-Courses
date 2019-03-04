@@ -20,7 +20,7 @@ public class Urgency {
 	@NonNull
 	private String procedure;
 	@NonNull
-	private boolean dispacth;
+	private Boolean dispacth;
 	@NonNull
 	private String dispatchPlace;
 	@NonNull

@@ -2,22 +2,20 @@ package com.example.demo.model;
 
 import java.util.List;
 
+import lombok.Data;
 import lombok.NonNull;
-
+@Data
 public class Pacient {
-	
+	@NonNull
 	private String identification;
+	@NonNull
 	private String name;
+	@NonNull
 	private String lastName;
+	
 	private String program;
 	private String academyDenpendency;
-	private boolean status;
-	
-	private List<DrugSupply> supplies;
-	
-	private List<Urgency> urgencies;
-	
 	@NonNull
-	private User user;
-
+	private Boolean status;
+	
 }

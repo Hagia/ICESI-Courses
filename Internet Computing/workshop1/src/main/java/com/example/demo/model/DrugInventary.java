@@ -1,13 +1,17 @@
 package com.example.demo.model;
 
 import lombok.Data;
+import lombok.NonNull;
 
 @Data
 public class DrugInventary {
-
+	@NonNull
 	private Drug drug;
-	private int amount;
+	@NonNull
+	private Integer amount;
+	@NonNull
 	private String place;
+	@NonNull
 	private String endDate;
 	
 }

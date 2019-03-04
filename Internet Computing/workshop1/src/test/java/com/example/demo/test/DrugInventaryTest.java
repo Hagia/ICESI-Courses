@@ -25,7 +25,22 @@ public class DrugInventaryTest {
 	}
 	
 	@Test
-	public void deliverDrug() {
+	public void AddDrug() {
+			
+	}
+	
+	@Test
+	public void FindDrug() {
+			
+	}
+	
+	@Test
+	public void AddTwoDrug() {
+			
+	}
+	
+	@Test
+	public void DeleteDrug() {
 			
 	}
 
