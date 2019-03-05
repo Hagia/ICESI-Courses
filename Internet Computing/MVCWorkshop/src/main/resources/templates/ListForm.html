@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>Listar libros</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>Libros</h1>
+			</div>
+		</div>
+		<div>
+			<div>
+				<table>
+					<thead>
+						<tr>
+							<th>Título</th>
+							<th>Autor</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:if="${books.empty}">
+							<td colspan="2">No hay libros</td>
+						</tr>
+						<tr th:each="book : ${books}">
+							<td><span th:text="${book.title}"> Título </span></td>
+							<td><span th:text="${book.author}"> Autor </span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-6">
+				<a href="#" th:href="@{/crear}"> Adicionar libros </a> <a href="#"
+					th:href="@{/editar}"
+					th:classappend="${books.empty} ? 'disabled' : ''"> Editar
+					Libros </a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
