@@ -1,4 +1,4 @@
-package com.example.demo.test;
+package com.example.demo;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -8,20 +8,18 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.*;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.runners.JUnit4;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
-import com.example.demo.model.Drug;
 import com.example.demo.model.Pacient;
 import com.example.demo.model.Urgency;
 import com.example.demo.repository.UrgencyRepository;
 import com.example.demo.services.UrgencyService;
-
-@RunWith(MockitoJUnitRunner.class)
-public class UrgencyUnitTest {
-	
+@RunWith(JUnit4.class)
+public class UrgencyIntegrationTest {
 	private UrgencyService urgencyService;
-	@Mock
+	
 	private UrgencyRepository urgencyRepository;
 	
 	private Urgency urgency;
@@ -36,40 +34,33 @@ public class UrgencyUnitTest {
 	
 	@Test
 	public void create() {
-		Mockito.when(urgencyService.Create(urgency)).thenReturn(urgency);
 		Urgency f=urgencyRepository.Create(urgency);
 		assertNotNull(f);
 	}
 	@Test
 	public void delete() {
-		Mockito.when(urgencyService.Delete(urgency)).thenReturn(urgency);
 		Urgency f=urgencyRepository.Delete(urgency);
 		assertNotNull(f);
 	}
 	@Test
 	public void find() {
-		Mockito.when(urgencyService.Find(urgency)).thenReturn(urgency);
 		Urgency f=urgencyRepository.Find(urgency);
 		assertNotNull(f);
 	}
 	
 	@Test
 	public void createNull() {
-		Mockito.when(urgencyService.Create(urgency)).thenReturn(null);
 		Urgency f=urgencyRepository.Create(urgency);
 		assertNull(f);
 	}
 	@Test
 	public void deleteNull() {
-		Mockito.when(urgencyService.Delete(urgency)).thenReturn(null);
 		Urgency f=urgencyRepository.Delete(urgency);
 		assertNull(f);
 	}
 	@Test
 	public void findNull() {
-		Mockito.when(urgencyService.Find(urgency)).thenReturn(null);
 		Urgency f=urgencyRepository.Find(urgency);
 		assertNull(f);
 	}
-
 }

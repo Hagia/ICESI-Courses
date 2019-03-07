@@ -9,7 +9,7 @@
 				<h1>Libros</h1>
 			</div>
 		</div>
-		<div>
+		<div>localhost:8080/create
 			<div>
 				<table>
 					<thead>
@@ -30,8 +30,8 @@
 				</table>
 			</div>
 			<div class="col-md-6">
-				<a href="#" th:href="@{/crear}"> Adicionar libros </a> <a href="#"
-					th:href="@{/editar}"
+				<a href="#" th:href="@{/create}"> Adicionar libros </a> <a href="#"
+					th:href="@{/edit}"
 					th:classappend="${books.empty} ? 'disabled' : ''"> Editar
 					Libros </a>
 			</div>

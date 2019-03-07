@@ -12,7 +12,7 @@
 		<div>
 			<div>
 				<a href="#" th:href="@{/listar}"> Volver al listado </a>
-				<form action="#" class="form-horizontal" th:action="@{/guardar}"
+				<form action="#" class="form-horizontal" th:action="@{/save}"
 					th:object="${form}" method="post">
 					<fieldset>
 						<span> <input type="submit" id="submitButton"
@@ -28,13 +28,13 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="book, itemStat : *{books}">
+								<tr th:each="book, itemStat : *{bookList}">
 									<td><input
 										th:placeholder="Title + ' ' + ${itemStat.count}"
-										th:field="*{books[__${itemStat.index}__].title}" required /></td>
+										th:field="*{bookList[__${itemStat.index}__].title}" required /></td>
 									<td><input
 										th:placeholder="Author + ' ' + ${itemStat.count}"
-										th:field="*{books[__${itemStat.index}__].author}" required /></td>
+										th:field="*{bookList[__${itemStat.index}__].author}" required /></td>
 								</tr>
 							</tbody>
 						</table>

@@ -1,4 +1,4 @@
-package com.example.demo.test;
+package com.example.demo;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -15,18 +15,15 @@ import com.example.demo.model.Drug;
 import com.example.demo.model.DrugInventary;
 import com.example.demo.model.DrugSupply;
 import com.example.demo.model.Pacient;
-import com.example.demo.repository.DrugInventaryRepository;
 import com.example.demo.repository.DrugSupplyRepository;
 import com.example.demo.services.DrugSupplyService;
 
 @RunWith(JUnit4.class)
-public class DrugSupplyIntegrationTest2 {
+public class DrugSupplyIntegrationTest {
 	
 	private DrugSupplyService supplyService;
 
 	private DrugSupplyRepository supplyRepository;
-	
-	private DrugInventaryRepository inventaryRepository;
 	
 	private Drug drug;
 	private DrugInventary drugInventary;
@@ -39,7 +36,7 @@ public class DrugSupplyIntegrationTest2 {
 		drugInventary = new DrugInventary(drug, 10, "El bano", "24/abril/2018");
 		pacient = new Pacient("1113681367", "Santiago", "Gutierrez", false);
 		supply = new DrugSupply("12345", drug, pacient, new Date(), "Gripa");
-		supplyService = new DrugSupplyService(supplyRepository, inventaryRepository);
+		supplyService = new DrugSupplyService(supplyRepository);
 	}
 
 	@Test

@@ -1,4 +1,4 @@
-package com.example.demo.test;
+package com.example.demo;
 
 import static org.hamcrest.CoreMatchers.any;
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -18,18 +18,18 @@ import com.example.demo.model.Drug;
 import com.example.demo.model.DrugInventary;
 import com.example.demo.model.DrugSupply;
 import com.example.demo.model.Pacient;
-import com.example.demo.repository.DrugInventaryRepository;
+import com.example.demo.model.Urgency;
 import com.example.demo.repository.DrugSupplyRepository;
+import com.example.demo.repository.UrgencyRepository;
+import com.example.demo.services.DrugInventaryService;
+import com.example.demo.services.DrugService;
 import com.example.demo.services.DrugSupplyService;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DrugSupplyUnitTest2 {
+public class DrugSupplyUnitTest {
 	
 	private DrugSupplyService supplyService;
 
-	@Mock
-	private DrugInventaryRepository inventaryRepository;
-	
 	@Mock
 	private DrugSupplyRepository supplyRepository;
 
@@ -44,13 +44,12 @@ public class DrugSupplyUnitTest2 {
 		drugInventary = new DrugInventary(drug, 10, "El bano", "24/abril/2018");
 		pacient = new Pacient("1113681367", "Santiago", "Gutierrez", false);
 		supply = new DrugSupply("12345", drug, pacient, new Date(), "Gripa");
-		supplyService = new DrugSupplyService(supplyRepository, inventaryRepository);
+		supplyService = new DrugSupplyService(supplyRepository);
 	}
 
 	@Test
 	public void createDrugSupplyRegister() {
 		Mockito.when(supplyRepository.create(supply)).thenReturn(supply);
-		Mockito.when(inventaryRepository.update(drugInventary)).thenReturn(drugInventary);
 		DrugSupply s = supplyService.create(supply);
 		assertNotNull(s);
 	}
