@@ -8,7 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Book;
 
+import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
+
 @Service
+@Log4j2
 public class BookServiceImp implements BookService{
 	
 	private HashMap<String, Book> books;
@@ -30,6 +34,7 @@ public class BookServiceImp implements BookService{
 		// TODO Auto-generated method stub
 		for (Book book : books) {
 			this.books.put(book.getTitle(), book);
+			log.info(book.getAuthor());
 		}
 	}
 
