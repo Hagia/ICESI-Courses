@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.util.Date;
+
 import lombok.Data;
 import lombok.NonNull;
 
@@ -12,6 +14,6 @@ public class DrugInventary {
 	@NonNull
 	private String place;
 	@NonNull
-	private String endDate;
+	private Date endDate;
 	
 }

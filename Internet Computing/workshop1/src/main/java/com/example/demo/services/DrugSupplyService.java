@@ -1,51 +1,66 @@
 package com.example.demo.services;
 
-
-import com.example.demo.model.*;
+import com.example.demo.model.Drug;
+import com.example.demo.model.DrugInventary;
 import com.example.demo.model.DrugSupply;
 import com.example.demo.model.Pacient;
-import com.example.demo.repository.DrugInventaryRepository;
 import com.example.demo.repository.DrugSupplyRepository;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 public class DrugSupplyService {
-	
-	private DrugInventaryRepository inventariesRepository;
-	
-	private PacientRepository pacientsRepository;
 
-	private DrugSupplyRepository suppliesReporsitory;
-	
-	private DrugRepository drugsRepository;
-	
-	public DrugSupplyService(DrugSupplyRepository supplies) {
-		this.suppliesReporsitory = supplies;
-	}
-	
-	public DrugSupplyService(DrugSupplyRepository reporsitory, DrugInventaryRepository inventary) {
-		this.suppliesReporsitory = reporsitory;
-		this.inventariesRepository = inventary;
-	}
-	
-	public DrugSupply create(DrugSupply supply) {
-		// TODO Auto-generated method stub
-		Pacient pacient = pacientsRepository.find(supply.getPacient());
-		Drug drug = drugsRepository.find(supply.getDrug());
-		DrugInventary[] inventary = inventariesRepository.find(supply.getDrug());
-		DrugSupply s = suppliesReporsitory.create(supply);
-		return  s;
+	private DrugService drugService;
+	private PacientService pacientsService;
+	private DrugInventaryService inventaryService;
+	private DrugSupplyRepository suppliesRepository;
+
+	public DrugSupplyService(DrugSupplyRepository reporsitory, DrugInventaryService inventary, PacientService pacients, DrugService drugs) {
+		this.suppliesRepository = reporsitory;
+		this.inventaryService = inventary;
+		this.pacientsService = pacients;
+		this.drugService = drugs;
 	}
 
-	public DrugSupply delete(DrugSupply supply) {
+	public DrugSupply create(DrugSupply supply) throws Exception {
 		// TODO Auto-generated method stub
-		return suppliesReporsitory.delete(supply);
+		boolean requierementsExist = verifyRequirements(supply) && verifyAvaliableAmount(supply);
+
+		if (!requierementsExist)
+			throw new Exception("Drug supply does not fullfill requirements");
+
+		return suppliesRepository.create(supply);
 	}
 
-	public DrugSupply find(DrugSupply supply) {
+	public DrugSupply delete(DrugSupply supply) throws Exception {
 		// TODO Auto-generated method stub
-		return suppliesReporsitory.find(supply);
+		boolean requirementsExist = verifyRequirements(supply);
+		if (!requirementsExist)
+			throw new Exception("Drug supply does not fullfill requirements");
+		return suppliesRepository.delete(supply);
+	}
+
+	public DrugSupply find(DrugSupply supply) throws Exception {
+		// TODO Auto-generated method stub
+		boolean requirementsExist = verifyRequirements(supply);
+		if (!requirementsExist)
+			throw new Exception("Drug supply does not fullfill requirements");
+		return suppliesRepository.find(supply);
+	}
+
+	private boolean verifyRequirements(DrugSupply drugSupply) {
+		Pacient pacient = pacientsService.find(drugSupply.getPacient());
+		Drug drug = drugService.find(drugSupply.getDrug());
+
+		boolean requierementsExist = pacient != null ? true : false && drug != null ? true : false;
+		return requierementsExist;
+	}
+
+	private boolean verifyAvaliableAmount(DrugSupply drugSupply) {
+		DrugInventary inventary = inventaryService.find(drugSupply.getDrug());
+		return inventary.getAmount() > 0;
 	}
 }

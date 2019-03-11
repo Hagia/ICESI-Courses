@@ -11,7 +11,7 @@ import lombok.NonNull;
 @Data
 public class DrugInventaryRepository {
 
-	private HashMap<String, DrugInventary> Inventary;
+	private HashMap<String, DrugInventary> inventary;
 
 	public void Create(DrugInventary drug) {
 
@@ -25,9 +25,9 @@ public class DrugInventaryRepository {
 		return null;
 	}
 
-	public DrugInventary[] find(@NonNull Drug drug) {
+	public DrugInventary find(@NonNull Drug drug) {
 		// TODO Auto-generated method stub
-		return null;
+		return inventary.get(drug.getId());
 	}
 
 	public Object update(DrugInventary drugInventary) {

@@ -6,18 +6,14 @@ import com.example.demo.model.Drug;
 import com.example.demo.model.DrugInventary;
 import com.example.demo.repository.DrugInventaryRepository;
 
+import lombok.NonNull;
+
 public class DrugInventaryService {
 	
 	private DrugInventaryRepository inventaryRepository;
 	
-	public void Create(DrugInventary drug) {
-		
-	}
-	public DrugInventary Delete(DrugInventary drug) {
-		return null;
-	}
-	
-	public DrugInventary Find(DrugInventary drug) {
+	public DrugInventary find(@NonNull Drug drug) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 	
