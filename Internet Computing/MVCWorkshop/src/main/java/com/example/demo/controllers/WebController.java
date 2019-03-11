@@ -38,30 +38,23 @@ public class WebController {
 	@GetMapping("/create")
 	public String create(Model model) {
 		BookList bookList = new BookList();
-		bookList.addBook(new Book());
-		bookList.addBook(new Book());
-		bookList.addBook(new Book());
+		bookList.beforeForm(1);
 		model.addAttribute("form", bookList);
 		return "CreateForm";
 	}
 	
 	@GetMapping("/edit")
-	public String edit(Model model) {
-		System.out.println(bookService ==null?"Bueno":"Malo");
-		
+	public String edit(Model model) {		
 		BookList bookList = new BookList();
 		bookList.setBookList(bookService.findAll());
-		model.addAttribute("books", bookList.getBookList());
+		model.addAttribute("bookList", bookList.getBookList());
 		return "EditForm";
 	}
 	
 	@PostMapping("/save")
 	public String save(Model model, @ModelAttribute BookList books) {
-		
 		bookService.saveAll(books.getBookList());
-		books.setBookList(bookService.findAll());
-		model.addAttribute("books", books.getBookList());
-		return "ListForm";
+		
+		return list(model);
 	}
-
 }

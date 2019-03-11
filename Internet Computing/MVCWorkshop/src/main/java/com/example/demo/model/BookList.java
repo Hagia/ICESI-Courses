@@ -17,5 +17,11 @@ public class BookList {
 	public void addBook(Book book) {
 		bookList.add(book);
 	}
+	
+	public void beforeForm(int length) {
+		for(int i = 0; i< length; i ++) {
+			this.addBook(new Book());
+		}
+	}
 
 }
