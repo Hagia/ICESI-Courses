@@ -14,9 +14,14 @@ public class DrugRepository {
 		drugs = new HashMap<>();
 	}
 	
-	public Drug find(@NonNull Drug drug) {
+	public Drug find( Drug drug) {
 		// TODO Auto-generated method stub
 		return drugs.get(drug.getId());
+	}
+
+	public Drug create(Drug drug) {
+		// TODO Auto-generated method stub
+		return drugs.put(drug.getId(), drug);
 	}
 
 }

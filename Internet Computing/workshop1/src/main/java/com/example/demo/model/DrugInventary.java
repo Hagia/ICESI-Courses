@@ -15,5 +15,4 @@ public class DrugInventary {
 	private String place;
 	@NonNull
 	private Date endDate;
-	
 }

@@ -2,9 +2,12 @@ package com.example.demo.repository;
 
 import java.util.HashMap;
 
+import org.springframework.stereotype.Repository;
+
 import com.example.demo.model.DrugInventary;
 import com.example.demo.model.Urgency;
 
+@Repository
 public class UrgencyRepository {
 	
 	private HashMap<String, Urgency> listUrgency;

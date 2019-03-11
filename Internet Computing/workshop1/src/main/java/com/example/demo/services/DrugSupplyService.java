@@ -1,5 +1,8 @@
 package com.example.demo.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.example.demo.model.Drug;
 import com.example.demo.model.DrugInventary;
 import com.example.demo.model.DrugSupply;
@@ -8,30 +11,37 @@ import com.example.demo.repository.DrugSupplyRepository;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 @Data
 @NoArgsConstructor
+@Service
 public class DrugSupplyService {
-
+	
+	@Autowired
 	private DrugService drugService;
+	@Autowired
 	private PacientService pacientsService;
+	@Autowired
 	private DrugInventaryService inventaryService;
+	@Autowired
 	private DrugSupplyRepository suppliesRepository;
-
-	public DrugSupplyService(DrugSupplyRepository reporsitory, DrugInventaryService inventary, PacientService pacients, DrugService drugs) {
-		this.suppliesRepository = reporsitory;
-		this.inventaryService = inventary;
-		this.pacientsService = pacients;
-		this.drugService = drugs;
+	
+	public DrugSupplyService(DrugService drugService, PacientService pacientsService,DrugInventaryService inventaryService, DrugSupplyRepository suppliesRepository) {
+		this.drugService = drugService;
+		this.pacientsService = pacientsService;
+		this.inventaryService = inventaryService;
+		this.suppliesRepository = suppliesRepository;
 	}
 
 	public DrugSupply create(DrugSupply supply) throws Exception {
 		// TODO Auto-generated method stub
 		boolean requierementsExist = verifyRequirements(supply) && verifyAvaliableAmount(supply);
-
 		if (!requierementsExist)
 			throw new Exception("Drug supply does not fullfill requirements");
-
+		DrugInventary di = inventaryService.find(supply);
+		di.setAmount(di.getAmount()-1);
+		inventaryService.update(di);
 		return suppliesRepository.create(supply);
 	}
 
@@ -60,7 +70,11 @@ public class DrugSupplyService {
 	}
 
 	private boolean verifyAvaliableAmount(DrugSupply drugSupply) {
-		DrugInventary inventary = inventaryService.find(drugSupply.getDrug());
+		DrugInventary inventary = inventaryService.find(drugSupply);
 		return inventary.getAmount() > 0;
+	}
+	
+	public void clear() {
+		suppliesRepository.clear();
 	}
 }
