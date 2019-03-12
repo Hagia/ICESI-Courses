@@ -34,11 +34,11 @@
 									<td><input
 										th:placeholder="Title + ' ' + ${itemStat.count}"
 										th:name="|bookList[${itemStat.index}].title|"
-										th:value="${book.getTitle()}" required /></td>
+										th:value="${book.getTitle()}"/></td>
 									<td><input
 										th:placeholder="Author + ' ' + ${itemStat.count}"
 										th:name="|bookList[${itemStat.index}].author|"
-										th:value="${book.getAuthor()}" required /></td>
+										th:value="${book.getAuthor()}"/></td>
 								</tr>
 							</tbody>
 						</table>

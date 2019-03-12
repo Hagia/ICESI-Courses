@@ -23,8 +23,8 @@
 							<td colspan="2">No hay libros</td>
 						</tr>
 						<tr th:each="book : ${books}">
-							<td><span th:text="${book.title}"> Título </span></td>
-							<td><span th:text="${book.author}"> Autor </span></td>
+							<td><span th:text="${book.title}">Titulo</span></td>
+							<td><a href="#" th:href="${'/edit/'+book.author}" th:text="${book.author}">Author</a></td>
 						</tr>
 					</tbody>
 				</table>
