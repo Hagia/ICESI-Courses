@@ -19,23 +19,18 @@ public class DrugInventaryRepository {
 		this.inventary = new HashMap<>();
 	}
 
-	public DrugInventary delete(DrugInventary drug) {
-		return null;
+	public DrugInventary delete(Drug drug) {
+		return inventary.remove(drug.getId());
 	}
 
-	public DrugInventary find(@NonNull DrugInventary drugInventary) {
+	public DrugInventary find(Drug drug) {
 		// TODO Auto-generated method stub
-		return inventary.get(drugInventary.getDrug().getId());
+		return inventary.get(drug.getId());
 	}
 
 	public DrugInventary update(DrugInventary drugInventary) {
 		// TODO Auto-generated method stub
 		return inventary.put(drugInventary.getDrug().getId(), drugInventary);
-	}
-
-	public DrugInventary find(@NonNull DrugSupply drugSupply) {
-		// TODO Auto-generated method stub
-		return inventary.get(drugSupply.getDrug().getId());
 	}
 
 	public DrugInventary create(DrugInventary drugInventary) {

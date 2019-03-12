@@ -22,12 +22,12 @@ public class DrugInventaryService {
 	
 	public DrugInventary find(@NonNull DrugInventary drugInventary) {
 		// TODO Auto-generated method stub
-		return inventaryRepository.find(drugInventary);
+		return inventaryRepository.find(drugInventary.getDrug());
 	}
 	
 	public DrugInventary find(@NonNull DrugSupply drugSupply) {
 		// TODO Auto-generated method stub
-		return inventaryRepository.find(drugSupply);
+		return inventaryRepository.find(drugSupply.getDrug());
 	}
 
 	public DrugInventary update(DrugInventary drugInventary) {

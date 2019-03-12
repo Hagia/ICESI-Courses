@@ -10,19 +10,27 @@ import com.example.demo.model.Urgency;
 @Repository
 public class UrgencyRepository {
 	
-	private HashMap<String, Urgency> listUrgency;
+	private HashMap<String, Urgency> urgencies;
 	
-	public Urgency Create(Urgency drug) {
-		return null;
-
+	public UrgencyRepository() {
+		urgencies = new HashMap<>();
+	}
+	
+	public Urgency create(Urgency urgency) {
+		return urgencies.put(urgency.getId(), urgency);
 	}
 
-	public Urgency Delete(Urgency drug) {
-		return null;
+	public Urgency delete(Urgency urgency) {
+		return urgencies.remove(urgency.getId());
 	}
 
-	public Urgency Find(Urgency drug) {
-		return null;
+	public Urgency find(Urgency urgency) {
+		return urgencies.get(urgency.getId());
+	}
+
+	public void clear() {
+		// TODO Auto-generated method stub
+		urgencies.clear();
 	}
 	
 	

@@ -25,5 +25,9 @@ public class PacientService {
 		// TODO Auto-generated method stub
 		return pacientRepository.create(pacient);
 	}
+	
+	public void clear() {
+		pacientRepository.clear();
+	}
 
 }

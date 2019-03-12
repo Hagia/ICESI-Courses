@@ -23,5 +23,9 @@ public class DrugRepository {
 		// TODO Auto-generated method stub
 		return drugs.put(drug.getId(), drug);
 	}
+	
+	public Drug delete(Drug drug) {
+		return drugs.remove(drug.getId());
+	}
 
 }

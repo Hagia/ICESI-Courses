@@ -23,5 +23,14 @@ public class PacientRepository {
 		// TODO Auto-generated method stub
 		return pacients.put(pacient.getIdentification(), pacient);
 	}
+	
+	public Pacient delete(Pacient pacient) {
+		return pacients.remove(pacient.getIdentification());
+	}
+
+	public void clear() {
+		// TODO Auto-generated method stub
+		pacients.clear();
+	}
 
 }
