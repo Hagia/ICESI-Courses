@@ -19,11 +19,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.example.demo.WorkshopApplication;
-import com.example.demo.model.Pacient;
+import com.example.demo.model.Patient;
 import com.example.demo.model.Urgency;
 import com.example.demo.repository.UrgencyRepository;
 import com.example.demo.services.DrugSupplyService;
-import com.example.demo.services.PacientService;
+import com.example.demo.services.PatientService;
 import com.example.demo.services.UrgencyService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -34,37 +34,45 @@ public class UrgencyIntegrationTest {
 	@Autowired
 	private UrgencyRepository urgencyRepository;
 	@Autowired
-	private PacientService pacientService;
-	@Autowired
-	private DrugSupplyService supplyService;
+	private PatientService patientService;
 
 	private Urgency urgency;
-	private Pacient pacient;
+	private Patient patient;
 
 	@Before
 	public void initial() {
 
-		pacient = new Pacient("1113681367", "Santiago", "Gutierrez", false);
-		urgency = new Urgency("123456", new Date(), pacient, "A las 3am sale el ayuwaki", "Presion", false, "N/D",
+		patient = new Patient("1113681367", "Santiago", "Gutierrez", false);
+		urgency = new Urgency("123456", new Date(), patient, "A las 3am sale el ayuwaki", "Presion", false, "N/D",
 				"Guapo");
 
 	}
 
 	@Test
-	public void createUrgencyRegister() {
+	public void createValidUrgencyRegister() {
 		try {
-			pacientService.create(pacient);
+			patientService.create(patient);
 			Urgency f = urgencyService.create(urgency);
 			assertNotNull(f);
 		} catch (Exception e) {
 			fail();
 		}
 	}
+	
+	@Test
+	public void createInvalidPatientUrgencyRegister() {
+		try {
+			urgencyService.create(urgency);
+		} catch (Exception e) {
+			assertTrue(true);
+		}
+	}
+
 
 	@Test
 	public void deleteExistingUrgencyRegister() {
 		try {
-			pacientService.create(pacient);
+			patientService.create(patient);
 			urgencyService.create(urgency);
 			Urgency f = urgencyService.delete(urgency);
 			assertNotNull(f);
@@ -77,7 +85,7 @@ public class UrgencyIntegrationTest {
 	@Test
 	public void findExistingUrgencyRegister() {
 		try {
-			pacientService.create(pacient);
+			patientService.create(patient);
 			urgencyService.create(urgency);
 			Urgency f = urgencyRepository.find(urgency);
 			assertNotNull(f);

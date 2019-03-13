@@ -16,7 +16,8 @@ public class DrugSupplyRepository {
 
 	public DrugSupply create(DrugSupply supply) {
 		// TODO Auto-generated method stub
-		return supplies.put(supply.getId(), supply);
+		supplies.put(supply.getId(), supply);
+		return supplies.get(supply.getId());
 	}
 
 	public DrugSupply delete(DrugSupply supply) {

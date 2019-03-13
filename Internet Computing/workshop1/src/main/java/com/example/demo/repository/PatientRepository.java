@@ -2,29 +2,29 @@ package com.example.demo.repository;
 
 import java.util.HashMap;
 
-import com.example.demo.model.Pacient;
+import com.example.demo.model.Patient;
 
 import lombok.NonNull;
 
-public class PacientRepository {
+public class PatientRepository {
 	
-	private HashMap<String, Pacient> pacients;
+	private HashMap<String, Patient> pacients;
 	
-	public PacientRepository() {
+	public PatientRepository() {
 		pacients= new HashMap<>();
 	}
 
-	public Pacient find(@NonNull Pacient pacient) {
+	public Patient find(@NonNull Patient pacient) {
 		// TODO Auto-generated method stub
 		return pacients.get(pacient.getIdentification());
 	}
 
-	public Pacient create(Pacient pacient) {
+	public Patient create(Patient pacient) {
 		// TODO Auto-generated method stub
 		return pacients.put(pacient.getIdentification(), pacient);
 	}
 	
-	public Pacient delete(Pacient pacient) {
+	public Patient delete(Patient pacient) {
 		return pacients.remove(pacient.getIdentification());
 	}
 

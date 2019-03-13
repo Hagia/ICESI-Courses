@@ -16,7 +16,7 @@ public class DrugSupply {
 	@NonNull
 	private Drug drug;
 	@NonNull
-	private Pacient pacient;
+	private Patient pacient;
 	@NonNull
 	private java.util.Date date;
 	private String observation;

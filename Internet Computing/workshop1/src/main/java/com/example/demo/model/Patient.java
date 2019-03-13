@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Data;
 import lombok.NonNull;
 @Data
-public class Pacient {
+public class Patient {
 	@NonNull
 	private String identification;
 	@NonNull

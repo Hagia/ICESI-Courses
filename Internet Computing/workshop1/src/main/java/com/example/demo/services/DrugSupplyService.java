@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Drug;
-import com.example.demo.model.DrugInventary;
+import com.example.demo.model.DrugInventory;
 import com.example.demo.model.DrugSupply;
-import com.example.demo.model.Pacient;
+import com.example.demo.model.Patient;
 import com.example.demo.repository.DrugSupplyRepository;
 
 import lombok.Data;
@@ -21,13 +21,13 @@ public class DrugSupplyService {
 	@Autowired
 	private DrugService drugService;
 	@Autowired
-	private PacientService pacientsService;
+	private PatientService pacientsService;
 	@Autowired
-	private DrugInventaryService inventaryService;
+	private DrugInventoryService inventaryService;
 	@Autowired
 	private DrugSupplyRepository suppliesRepository;
 	
-	public DrugSupplyService(DrugService drugService, PacientService pacientsService,DrugInventaryService inventaryService, DrugSupplyRepository suppliesRepository) {
+	public DrugSupplyService(DrugService drugService, PatientService pacientsService,DrugInventoryService inventaryService, DrugSupplyRepository suppliesRepository) {
 		this.drugService = drugService;
 		this.pacientsService = pacientsService;
 		this.inventaryService = inventaryService;
@@ -39,7 +39,7 @@ public class DrugSupplyService {
 		boolean requierementsExist = verifyRequirements(supply) && verifyAvaliableAmount(supply);
 		if (!requierementsExist)
 			throw new Exception("Drug supply does not fullfill requirements");
-		DrugInventary di = inventaryService.find(supply);
+		DrugInventory di = inventaryService.find(supply);
 		di.setAmount(di.getAmount()-1);
 		inventaryService.update(di);
 		return suppliesRepository.create(supply);
@@ -62,7 +62,7 @@ public class DrugSupplyService {
 	}
 
 	private boolean verifyRequirements(DrugSupply drugSupply) {
-		Pacient pacient = pacientsService.find(drugSupply.getPacient());
+		Patient pacient = pacientsService.find(drugSupply.getPacient());
 		Drug drug = drugService.find(drugSupply.getDrug());
 
 		boolean requierementsExist = pacient != null ? true : false && drug != null ? true : false;
@@ -70,8 +70,8 @@ public class DrugSupplyService {
 	}
 
 	private boolean verifyAvaliableAmount(DrugSupply drugSupply) {
-		DrugInventary inventary = inventaryService.find(drugSupply);
-		return inventary.getAmount() > 0;
+		DrugInventory inventory = inventaryService.find(drugSupply);
+		return inventory.getAmount() > 0;
 	}
 	
 	public void clear() {

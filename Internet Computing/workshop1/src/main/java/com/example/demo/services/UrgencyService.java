@@ -14,7 +14,7 @@ public class UrgencyService {
 	@Autowired
 	private UrgencyRepository urgencyRepository;
 	@Autowired
-	private PacientService pacientService;
+	private PatientService pacientService;
 	@Autowired
 	private DrugSupplyService supplyService;
 
@@ -50,7 +50,7 @@ public class UrgencyService {
 	public boolean verifyPreconditions(Urgency urgency) {
 
 		boolean accept = true;
-		Pacient pacient = pacientService.find(urgency.getPacient());
+		Patient pacient = pacientService.find(urgency.getPacient());
 		List<DrugSupply> supplies = urgency.getSupplies();
 		try {
 			if(supplies != null) {

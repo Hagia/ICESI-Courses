@@ -14,7 +14,7 @@ public class Urgency {
 	@NonNull
 	private Date date;
 	@NonNull
-	private Pacient pacient;
+	private Patient pacient;
 	@NonNull
 	private String description;
 	@NonNull

@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NonNull;
 
 @Data
-public class DrugInventary {
+public class DrugInventory {
 	@NonNull
 	private Drug drug;
 	@NonNull

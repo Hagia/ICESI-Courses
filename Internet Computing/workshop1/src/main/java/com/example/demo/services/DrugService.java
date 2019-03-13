@@ -3,7 +3,7 @@ package com.example.demo.services;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Drug;
-import com.example.demo.model.DrugInventary;
+import com.example.demo.model.DrugInventory;
 import com.example.demo.repository.DrugRepository;
 
 import lombok.NonNull;

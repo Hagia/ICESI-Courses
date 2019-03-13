@@ -5,40 +5,44 @@ import java.util.HashMap;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Drug;
-import com.example.demo.model.DrugInventary;
+import com.example.demo.model.DrugInventory;
 import com.example.demo.model.DrugSupply;
-import com.example.demo.repository.DrugInventaryRepository;
+import com.example.demo.repository.DrugInventoryRepository;
 
 import lombok.NonNull;
 
 @Service
-public class DrugInventaryService {
+public class DrugInventoryService {
 	
-	private DrugInventaryRepository inventaryRepository;
+	private DrugInventoryRepository inventaryRepository;
 	
-	public DrugInventaryService() {
-		inventaryRepository = new DrugInventaryRepository();
+	public DrugInventoryService() {
+		inventaryRepository = new DrugInventoryRepository();
 	}
 	
-	public DrugInventary find(@NonNull DrugInventary drugInventary) {
+	public DrugInventory find(@NonNull DrugInventory drugInventary) {
 		// TODO Auto-generated method stub
 		return inventaryRepository.find(drugInventary.getDrug());
 	}
 	
-	public DrugInventary find(@NonNull DrugSupply drugSupply) {
+	public DrugInventory find(@NonNull DrugSupply drugSupply) {
 		// TODO Auto-generated method stub
 		return inventaryRepository.find(drugSupply.getDrug());
 	}
 
-	public DrugInventary update(DrugInventary drugInventary) {
+	public DrugInventory update(DrugInventory drugInventary) {
 		// TODO Auto-generated method stub
 		return inventaryRepository.update(drugInventary);
 	}
 
-	public DrugInventary create(DrugInventary drugInventary) {
+	public DrugInventory create(DrugInventory drugInventary) {
 		// TODO Auto-generated method stub
 		return inventaryRepository.create(drugInventary);
 		
+	}
+	
+	public void clear() {
+		inventaryRepository.clear();
 	}
 	
 

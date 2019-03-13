@@ -2,26 +2,26 @@ package com.example.demo.services;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.Pacient;
-import com.example.demo.repository.PacientRepository;
+import com.example.demo.model.Patient;
+import com.example.demo.repository.PatientRepository;
 
 import lombok.NonNull;
 
 @Service
-public class PacientService {
+public class PatientService {
 	
-	private PacientRepository pacientRepository;
+	private PatientRepository pacientRepository;
 	
-	public PacientService() {
-		pacientRepository = new PacientRepository();
+	public PatientService() {
+		pacientRepository = new PatientRepository();
 	}
 
-	public Pacient find(@NonNull Pacient pacient) {
+	public Patient find(@NonNull Patient pacient) {
 		// TODO Auto-generated method stub
 		return pacientRepository.find(pacient);
 	}
 
-	public Pacient create(Pacient pacient) {
+	public Patient create(Patient pacient) {
 		// TODO Auto-generated method stub
 		return pacientRepository.create(pacient);
 	}

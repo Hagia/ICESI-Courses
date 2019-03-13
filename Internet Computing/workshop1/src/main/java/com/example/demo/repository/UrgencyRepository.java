@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.model.DrugInventary;
+import com.example.demo.model.DrugInventory;
 import com.example.demo.model.Urgency;
 
 @Repository
@@ -17,7 +17,8 @@ public class UrgencyRepository {
 	}
 	
 	public Urgency create(Urgency urgency) {
-		return urgencies.put(urgency.getId(), urgency);
+		 urgencies.put(urgency.getId(), urgency);
+		return urgencies.get(urgency.getId());
 	}
 
 	public Urgency delete(Urgency urgency) {

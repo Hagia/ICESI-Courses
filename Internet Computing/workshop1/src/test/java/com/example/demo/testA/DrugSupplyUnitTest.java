@@ -3,6 +3,7 @@ package com.example.demo.testA;
 import static org.assertj.core.api.Assertions.fail;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.Calendar;
@@ -28,59 +29,104 @@ public class DrugSupplyUnitTest {
 
 	@Mock
 	private DrugService drugService;
-	
+
 	@Mock
-	private PacientService pacientsService;
-	
+	private PatientService patientsService;
+
 	@Mock
-	private DrugInventaryService inventaryService;
-	
+	private DrugInventoryService inventoryService;
+
 	@Mock
 	private DrugSupplyRepository supplyRepository;
 
 	private Drug drug;
-	private Pacient pacient;
+	private Patient patient;
 	private DrugSupply supply;
-	private DrugInventary drugInventary;
+	private DrugInventory drugInventory;
 
 	@Before
 	public void init() {
 		drug = new Drug("123", "PazNoche", "Noche", "MiCasa", "De Noche", "Mayores de 18");
-		pacient = new Pacient("1113681367", "Santiago", "Gutierrez", false);
-		supply = new DrugSupply("12345", drug, pacient, new Date(), "Gripa");
-		drugInventary = new DrugInventary(drug, 10, "Here", Calendar.getInstance().getTime());
-		
-		Mockito.when(pacientsService.find(pacient)).thenReturn(pacient);
-		Mockito.when(drugService.find(drug)).thenReturn(drug);
-		Mockito.when(inventaryService.find(supply)).thenReturn(drugInventary);
+		patient = new Patient("1113681367", "Santiago", "Gutierrez", false);
+		supply = new DrugSupply("12345", drug, patient, new Date(), "Gripa");
+
+		drugInventory = new DrugInventory(drug, 10, "Here", Calendar.getInstance().getTime());
 	}
 
 	@Test
-	public void createDrugSupplyRegister() {
+	public void createValidDrugSupplyRegister() {
+
+		// Ensure preconditions
+		Mockito.when(patientsService.find(patient)).thenReturn(patient);
+		Mockito.when(drugService.find(drug)).thenReturn(drug);
+		Mockito.when(inventoryService.find(supply)).thenReturn(drugInventory);
+
+		// Ensure repository works properly
 		Mockito.when(supplyRepository.create(supply)).thenReturn(supply);
-		
+
 		try {
 			DrugSupply s = supplyService.create(supply);
 			assertNotNull(s);
 		} catch (Exception e) {
-			e.printStackTrace();
 			fail();
 		}
 	}
 
 	@Test
-	public void createNullDrugSupplyRegister() {
-		Mockito.when(supplyRepository.create(supply)).thenReturn(null);
+	public void createInvalidPacientDrugSupplyRegister() {
+
+		// Ensure patient does not exists
+		Mockito.when(patientsService.find(patient)).thenReturn(null);
+		Mockito.when(drugService.find(drug)).thenReturn(drug);
+		Mockito.when(inventoryService.find(supply)).thenReturn(drugInventory);
+
+		try {
+			supplyService.create(supply);
+		} catch (Exception e) {
+			assertTrue(true);
+		}
+	}
+
+	@Test
+	public void createInvalidDrugSupplyRegister() {
+
+		// Ensure drug does not exists
+		Mockito.when(patientsService.find(patient)).thenReturn(patient);
+		Mockito.when(drugService.find(drug)).thenReturn(null);
+		Mockito.when(inventoryService.find(supply)).thenReturn(drugInventory);
+
 		try {
 			DrugSupply s = supplyService.create(supply);
-			assertNull(s);
 		} catch (Exception e) {
-			fail();
+			assertTrue(true);
+		}
+	}
+
+	@Test
+	public void createNotEnoughInventoryDrugSupplyRegister() {
+		// Ensure there is not inventory
+		drugInventory = new DrugInventory(drug, 0, "Here", Calendar.getInstance().getTime());
+
+		// Ensure drug does not exists
+		Mockito.when(patientsService.find(patient)).thenReturn(patient);
+		Mockito.when(drugService.find(drug)).thenReturn(drug);
+		Mockito.when(inventoryService.find(supply)).thenReturn(drugInventory);
+
+		try {
+			supplyService.create(supply);
+		} catch (Exception e) {
+			assertTrue(true);
 		}
 	}
 
 	@Test
 	public void deleteStoredDrugSupplyRegister() {
+
+		// Ensure preconditions
+		Mockito.when(patientsService.find(patient)).thenReturn(patient);
+		Mockito.when(drugService.find(drug)).thenReturn(drug);
+		Mockito.when(inventoryService.find(supply)).thenReturn(drugInventory);
+
 		Mockito.when(supplyRepository.delete(supply)).thenReturn(supply);
 		try {
 			DrugSupply s = supplyService.delete(supply);
@@ -92,6 +138,12 @@ public class DrugSupplyUnitTest {
 
 	@Test
 	public void deleteUnstoredDrugSupplyRegister() {
+
+		// Ensure preconditions
+		Mockito.when(patientsService.find(patient)).thenReturn(patient);
+		Mockito.when(drugService.find(drug)).thenReturn(drug);
+		Mockito.when(inventoryService.find(supply)).thenReturn(drugInventory);
+
 		Mockito.when(supplyRepository.delete(supply)).thenReturn(null);
 		try {
 			DrugSupply s = supplyService.delete(supply);
@@ -103,6 +155,11 @@ public class DrugSupplyUnitTest {
 
 	@Test
 	public void findStoredDrugSupplyRegister() {
+		// Ensure preconditions
+		Mockito.when(patientsService.find(patient)).thenReturn(patient);
+		Mockito.when(drugService.find(drug)).thenReturn(drug);
+		Mockito.when(inventoryService.find(supply)).thenReturn(drugInventory);
+
 		Mockito.when(supplyRepository.find(supply)).thenReturn(supply);
 		try {
 			DrugSupply s = supplyService.find(supply);
@@ -114,6 +171,11 @@ public class DrugSupplyUnitTest {
 
 	@Test
 	public void findUnstoredDrugSupplyRegister() {
+		// Ensure preconditions
+		Mockito.when(patientsService.find(patient)).thenReturn(patient);
+		Mockito.when(drugService.find(drug)).thenReturn(drug);
+		Mockito.when(inventoryService.find(supply)).thenReturn(drugInventory);
+
 		Mockito.when(supplyRepository.find(supply)).thenReturn(null);
 		try {
 			DrugSupply s = supplyService.find(supply);

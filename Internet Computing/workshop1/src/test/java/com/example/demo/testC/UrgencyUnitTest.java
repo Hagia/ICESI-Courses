@@ -15,12 +15,12 @@ import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.example.demo.model.Drug;
-import com.example.demo.model.Pacient;
+import com.example.demo.model.Patient;
 import com.example.demo.model.Urgency;
 import com.example.demo.repository.UrgencyRepository;
 import com.example.demo.services.DrugService;
 import com.example.demo.services.DrugSupplyService;
-import com.example.demo.services.PacientService;
+import com.example.demo.services.PatientService;
 import com.example.demo.services.UrgencyService;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -32,31 +32,43 @@ public class UrgencyUnitTest {
 	@Mock
 	private UrgencyRepository urgencyRepository;
 	@Mock
-	private PacientService pacientService;
+	private PatientService pacientService;
 	@Mock
 	private DrugSupplyService supplyService;
 
 	private Urgency urgency;
-	private Pacient pacient;
+	private Patient pacient;
 
 	@Before
 	public void initial() {
 
-		pacient = new Pacient("1113681367", "Santiago", "Gutierrez", false);
+		pacient = new Patient("1113681367", "Santiago", "Gutierrez", false);
 		urgency = new Urgency("123456", new Date(), pacient, "A las 3am sale el ayuwaki", "Presion", false, "N/D",
 				"Guapo");
 
 	}
 
 	@Test
-	public void createUrgencyRegister() {
+	public void createValidUrgencyRegister() {
 		try {
 			Mockito.when(pacientService.find(pacient)).thenReturn(pacient);
 			Mockito.when(urgencyRepository.create(urgency)).thenReturn(urgency);
+			
 			Urgency f = urgencyService.create(urgency);
 			assertNotNull(f);
 		} catch (Exception e) {
 			fail();
+		}
+	}
+	
+	@Test
+	public void createInvalidPatientUrgencyRegister() {
+		try {
+			Mockito.when(pacientService.find(pacient)).thenReturn(null);
+			
+			urgencyService.create(urgency);
+		} catch (Exception e) {
+			assertTrue(true);
 		}
 	}
 
