@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>User listing</title>
+</head>
+<body>
+	<div>
+		<div>
+			<div>
+				<table>
+					<thead>
+						<tr>
+							<th>Título</th>
+							<th>Autor</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:if="${users.empty}">
+							<td colspan="2">No hay libros</td>
+						</tr>
+						<tr th:each="user : ${users}">
+							<td><span th:text="${user.name}"> Name </span></td>
+							<td><span th:text="${user.mail}"> Mail </span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-6">
+				<a href="#" th:href="@{/add}"> Add users </a> <a href="#"
+					th:href="@{/edit}"
+					th:classappend="${books.empty} ? 'disabled' : ''"> Edit users </a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

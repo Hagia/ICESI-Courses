@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>User adding</title>
+</head>
+<body>
+	<div>
+		<div>
+			<table>
+				<thead>
+					<tr>
+						<th>Identifier</th>
+						<th>Name</th>
+						<th>Mail</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each = "user : {$users}">
+						<td><span th:text="${user.id}"> Id </span></td>
+						<td><span th:text="${user.name}"> Name </span></td>
+						<td><span th:text="${user.mail}"> Mail </span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-6">
+			<a href="#" th:href="@{/save}"> Save user </a>
+		</div>
+	</div>
+</body>
+</html>
