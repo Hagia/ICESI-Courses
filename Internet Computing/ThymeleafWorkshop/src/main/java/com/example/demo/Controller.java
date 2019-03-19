@@ -18,18 +18,8 @@ public class Controller {
 	private UserRepository ur;
 
 	@GetMapping("/add")
-	public ModelAndView add() {
-		ModelAndView mv = new ModelAndView();
-		
-		ur.save(new User());
-		Iterator<User> i = ur.findAll().iterator();
-		List<User> list = new ArrayList<>();
-		while(i.hasNext()) {
-			list.add(i.next());
-		}
-		
-		mv.addObject("users", list);
-		return mv;
+	public ModelAndView add() {		
+		return new ModelAndView();
 	}
 
 	@GetMapping("/edit")
@@ -44,7 +34,16 @@ public class Controller {
 
 	@GetMapping("/list")
 	public ModelAndView list() {
-		return new ModelAndView();
+		ur.save(new User());
+		Iterator<User> i = ur.findAll().iterator();
+		List<User> list = new ArrayList<>();
+		while(i.hasNext()) {
+			list.add(i.next());
+		}
+		
+		System.out.println(list.size());
+		
+		return new ModelAndView("list.html", "users", list);
 	}
 
 }

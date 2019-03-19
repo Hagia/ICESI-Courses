@@ -1,16 +1,18 @@
 package com.example.demo.model;
 
-import org.springframework.stereotype.Service;
+import javax.persistence.Entity;
+
+import org.springframework.data.annotation.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@Entity
 public class User {
 	
+	@javax.persistence.Id
 	private String id;
 	
 	private String name;

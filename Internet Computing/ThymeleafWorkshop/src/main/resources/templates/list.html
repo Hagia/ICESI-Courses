@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>User listing</title>
@@ -27,9 +27,7 @@
 				</table>
 			</div>
 			<div class="col-md-6">
-				<a href="#" th:href="@{/add}"> Add users </a> <a href="#"
-					th:href="@{/edit}"
-					th:classappend="${books.empty} ? 'disabled' : ''"> Edit users </a>
+				<a href="#" th:href="@{/add}"> Add users </a>
 			</div>
 		</div>
 	</div>
