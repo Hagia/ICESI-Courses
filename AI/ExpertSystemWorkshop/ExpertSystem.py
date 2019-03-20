@@ -1,19 +1,18 @@
 from pyknow import *
 
+class Ground(Fact):
+    pass
+
 class Drools(KnowledgeEngine):
-    
-    @DefFacts
-    def needed_data(self):
-    yield Fact(='ph')
-    yield Fact(best_body='cd')
-    yield Fact(best_sweetness='ground_texture')
 
-    def ask_ph():
+    @Rule(Ground(ph>=7.2))
+    def ask_ph(self):
         self.declare(Fact(ph=input("What's is the ground Ph?")))
-
-    def ask_cd():
+    @Rule(Ground(ph>6.8 & ph <7.2))
+    def ask_cd(self):
         self.declare(Fact(cd=input("What's is the ground electricity condutivity?")))
     
-    def ask_ph():
+    @Rule(Ground(ph <= 6.8 & ph > 6.2))
+    def ask_gt(self):
         self.declare(Fact(ground_texture=input("What's is the ground texture?")))
 
