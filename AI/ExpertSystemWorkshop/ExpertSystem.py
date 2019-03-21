@@ -14,7 +14,7 @@ class Drools(KnowledgeEngine):
     def ask_cd(self):
         print("==> ph: LIGERAMENTE ALCALINO")
     
-    
+    #A better way
     def ask_gt(self):
         print("==> ph: NEUTRO")
 
