@@ -13,10 +13,6 @@ class Drools(KnowledgeEngine):
     @Rule(AND(Ground(ph=P(lambda ph: ph > 6.8) & P(lambda ph: ph < 7.2))))
     def ask_cd(self):
         print("==> ph: LIGERAMENTE ALCALINO")
-    
-    #A better way
-    def ask_gt(self):
-        print("==> ph: NEUTRO")
 
 engine = Drools()
 engine.reset()
