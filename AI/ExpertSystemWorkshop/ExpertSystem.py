@@ -14,9 +14,9 @@ class Drools(KnowledgeEngine):
     def ask_cd(self):
         print("==> ph: LIGERAMENTE ALCALINO")
     
-    # @Rule(AND(Ground(ph <= 6.8),Ground(ph > 6.2)))
-    # def ask_gt(self):
-    #     print("==> ph: NEUTRO")
+    
+    def ask_gt(self):
+        print("==> ph: NEUTRO")
 
 engine = Drools()
 engine.reset()
