@@ -5,21 +5,35 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.model.User;
+import com.example.demo.model.UserList;
 import com.example.demo.repository.UserRepository;
 
+import lombok.RequiredArgsConstructor;
+
+
 @org.springframework.stereotype.Controller
-@RequestMapping("/")
+@RequiredArgsConstructor
 public class Controller {
 	
+	@Autowired
 	private UserRepository ur;
 
 	@GetMapping("/add")
 	public ModelAndView add() {		
-		return new ModelAndView();
+		ArrayList<User> i = new ArrayList<>();
+		i.add(new User());
+		UserList ul = new UserList();
+		ul.setList(i);
+		return new ModelAndView("add", "users", ul);
 	}
 
 	@GetMapping("/edit")
@@ -34,16 +48,22 @@ public class Controller {
 
 	@GetMapping("/list")
 	public ModelAndView list() {
-		ur.save(new User());
-		Iterator<User> i = ur.findAll().iterator();
+		
 		List<User> list = new ArrayList<>();
-		while(i.hasNext()) {
-			list.add(i.next());
+		Iterator<User> iter = ur.findAll().iterator();
+		while(iter.hasNext()) {
+			list.add(iter.next());
 		}
-		
-		System.out.println(list.size());
-		
 		return new ModelAndView("list.html", "users", list);
+	}
+	
+	@PostMapping("/save")
+	public RedirectView save(@ModelAttribute UserList users) {
+		List<User> l = users.getList();
+		for (User user2 : l) {
+			ur.save(user2);
+		}
+		return new RedirectView("/list");
 	}
 
 }

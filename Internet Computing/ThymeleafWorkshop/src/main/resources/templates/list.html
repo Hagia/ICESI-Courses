@@ -22,6 +22,7 @@
 						<tr th:each="user : ${users}">
 							<td><span th:text="${user.name}"> Name </span></td>
 							<td><span th:text="${user.mail}"> Mail </span></td>
+							<td> <a href="#" th:href="@{/edit + 'user.id'}"> Edit </a></td>
 						</tr>
 					</tbody>
 				</table>

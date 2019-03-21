@@ -7,25 +7,30 @@
 <body>
 	<div>
 		<div>
-			<table>
-				<thead>
-					<tr>
-						<th>Identifier</th>
-						<th>Name</th>
-						<th>Mail</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each = "user : {$users}">
-						<td><span th:text="${user.id}"> Id </span></td>
-						<td><span th:text="${user.name}"> Name </span></td>
-						<td><span th:text="${user.mail}"> Mail </span></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div class="col-md-6">
-			<a href="#" th:href="@{/save}"> Save user </a>
+			<a href="#" th:href="@{/list}"> Volver al listado </a>
+			<form action="#" class="form-horizontal" th:action="@{/save}"
+				th:object="${form}" method="post">
+				<fieldset>
+					<span> <input type="submit" id="submitButton"
+						th:value="Save"> <input type="reset" id="resetButton"
+						th:value="Resetear" />
+					</span>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Mail</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="user : ${users}">
+								<td><input th:placeholder="Name" required /></td>
+								<td><input th:placeholder="Mail" required /></td>
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
+			</form>
 		</div>
 	</div>
 </body>
