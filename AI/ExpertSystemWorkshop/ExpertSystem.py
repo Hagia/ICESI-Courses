@@ -6,13 +6,13 @@ class Ground(Fact):
 
 class Drools(KnowledgeEngine):
 
-    @Rule(Ground(ph=L(7.2)))
+    @Rule(Ground(ph=P(lambda ph: ph == 7.2)))
     def ask_ph(self):
         print("==> ph: ALCALINO")
     
-    # @Rule(AND(Ground(ph>6.8),Ground(ph<=7.2)))
-    # def ask_cd(self):
-    #     print("==> ph: LIGERAMENTE ALCALINO")
+    @Rule(AND(Ground(ph=P(lambda ph: ph > 6.8) & P(lambda ph: ph < 7.2))))
+    def ask_cd(self):
+        print("==> ph: LIGERAMENTE ALCALINO")
     
     # @Rule(AND(Ground(ph <= 6.8),Ground(ph > 6.2)))
     # def ask_gt(self):
@@ -20,6 +20,6 @@ class Drools(KnowledgeEngine):
 
 engine = Drools()
 engine.reset()
-engine.declare(Ground(ph=choice([7.2, 7.2, 7.2])))
+engine.declare(Ground(ph=choice([6.9, 7.2, 7.2, 7.2])))
 engine.run()
 
