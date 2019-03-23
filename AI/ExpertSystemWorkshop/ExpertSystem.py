@@ -217,4 +217,3 @@ engine.declare(Ground(PH=choice(["ALCALINO"])))
 engine.declare(Ground(CE=choice(["ALTA"])))
 engine.declare(Ground(arcilla=choice([40.0])))
 engine.run()
-
