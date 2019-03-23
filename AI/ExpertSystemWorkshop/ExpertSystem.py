@@ -62,6 +62,154 @@ class Drools(KnowledgeEngine):
         print("     |-(3) Baja mineralizacion de MO (Baja actvidad microbiologica")
         print("     |-(4) Acumulacion de iones alcalinoterreos")
 
+    @Rule(AND(Ground(arena=P(lambda arena: arena >= 50.0)),
+    Ground(PH=L("ALCALINO")),
+    Ground(CE=L("ALTA"))))
+    def rule_11(self):
+        print("\n\n")
+        print("==>")
+        print("     |-(1) Revisar las mediciones realizadas.")
+
+    @Rule(AND(Ground(limo=P(lambda limo: limo >= 45.0)),
+    Ground(PH=L("ALCALINO")),
+    Ground(CE=L("ALTA"))))
+    def rule_12(self):
+        print("\n\n")
+        print("==>")
+        print("     |-(1) Revisar las mediciones realizadas.")
+        print("     |-(1) Coloraciones grises suelo (Glaizeado)")
+        print("     |-(2) Suelo Hidromorfico")   
+        print("     |-(3) Limitaciones fisicas temporales")
+        print("     |-(4) Baja difusion de Oxigeno y flujo de gases")
+
+    @Rule(AND(Ground(arcilla=P(lambda limo: limo <= 40.0)),
+    Ground(arcilla=P(lambda arcilla: arcilla <=40.0)),
+    Ground(PH=L("ALCALINO")),
+    Ground(CE=L("ALTA"))))
+    def rule_13(self):
+        print("\n\n")
+        print("==>")
+        print("     |-(1) Baja disponibilidad de Fosforo (Precipitación)")
+        print("     |-(2) Baja disponibilidad de Calcio");  
+
+    @Rule(AND(Ground(arcilla=P(lambda arcilla: arcilla >=40.0)),
+    Ground(PH=L("ALCALINO")),
+    Ground(CE=L("BAJA"))))
+    def rule_14(self):
+        print("\n\n")
+        print("==>")
+        print("     |-(1) Limitaciones de movimiento de agua")
+        print("     |-(2) Baja difusion de Oxigeno y flujo de gases")
+        print("     |-(3) Baja mineralizacion de MO (Baja actvidad microbiologica")
+        print("     |-(4) Acumulacion de iones alcalinoterreos	")
+        print("     |-(5) Baja disponibilidad de elementos menores ")
+
+    @Rule(AND(Ground(arena=P(lambda arena: arena >=50.0)),
+    Ground(PH=L("ALCALINO")),
+    Ground(CE=L("BAJA"))))
+    def rule_15(self):
+        print("\n\n")
+        print("==>")
+        print("     |-(1) Revisar las mediciones realizadas.")
+
+    @Rule(AND(Ground(limo=P(lambda limo: limo >=45.0)),
+    Ground(PH=L("ALCALINO")),
+    Ground(CE=L("BAJA"))))
+    def rule_16(self):
+        print("\n\n")
+        print("==>")
+        print("     |-(1) Coloraciones grises suelo (Glaizeado)")
+        print("     |-(2) Suelo Hidromorfico")
+        print("     |-(3) Limitaciones fisicas temporales")
+        print("     |-(4) Baja difusion de Oxigeno y flujo de gases")
+        print("     |-(5) Baja disponibilidad de elementos menores ")
+
+    @Rule(AND(Ground(limo=P(lambda limo: limo <=40.0)),
+    Ground(arcilla=P(lambda arcilla: arcilla <=40.0)),
+    Ground(PH=L("ALCALINO")),
+    Ground(CE=L("ALTA"))))
+    def rule_17(self):
+        print("\n\n")
+        print("==>")
+        print("     |-(1) Baja disponibilidad de Fosforo (Precipitación)")
+        print("     |-(2) Baja disponibilidad de Calcio")
+        print("     |-(3) Baja disponibilidad de elementos menores ")
+    
+    @Rule(AND(Ground(arcilla=P(lambda arcilla: arcilla <=40.0)),
+    Ground(PH=L("LIGERAMENTE ALCALINO")),
+    Ground(CE=L("ALTA"))))
+    def rule_18(self):
+        print("\n\n")
+        print("==>")
+        print("     |-(1) Limitaciones de movimiento de agua")
+        print("     |-(2) Baja difusion de Oxigeno y flujo de gases")
+        print("     |-(3) Baja mineralizacion de MO (Baja actvidad microbiologica")
+        print("     |-(4) Acumulacion de iones alcalinoterreos	")
+        print("     |-(5) Alta saturación de calcio")
+        print("     |-(6) Salinidad en el suelo")
+        print("     |-(7) Baja disponibilidad de Fosforo (Precipitación)")
+
+    @Rule(AND(Ground(arena=P(lambda arena: arena >=50.0)),
+    Ground(PH=L("LIGERAMENTE ALCALINO")),
+    Ground(CE=L("ALTA"))))
+    def rule_19(self):
+        print("\n\n")
+        print("==>")
+        print("     |-(1) Revisar las mediciones realizadas.")
+
+    @Rule(AND(Ground(limo=P(lambda limo: limo >=45.0)),
+    Ground(PH=L("LIGERAMENTE ALCALINO")),
+    Ground(CE=L("ALTA"))))
+    def rule_20(self):
+        print("\n\n")
+        print("==>")
+        print("     |-(1) Coloraciones grises suelo (Glaizeado)")
+        print("     |-(2) Suelo Hidromorfico")
+        print("     |-(3) Limitaciones fisicas temporales")
+        print("     |-(4) Baja difusion de Oxigeno y flujo de gases")
+
+    @Rule(AND(Ground(limo=P(lambda limo: limo <=40.0)),
+    Ground(arena=P(lambda arena: arena <=40.0)),
+    Ground(arcilla=P(lambda arcilla: arcilla <=40.0)),
+    Ground(PH=L("LIGERAMENTE ALCALINO")),
+    Ground(CE=L("ALTA"))))
+    def rule_21(self):
+        print("\n\n")
+        print("==>")
+        print("     |-(1) Baja disponibilidad de Fosforo (Precipitación)")
+        print("     |-(2) Baja disponibilidad de Calcio")
+
+    @Rule(AND(Ground(arcilla=P(lambda arcilla: arcilla >=40.0)),
+    Ground(PH=L("LIGERAMENTE ALCALINO")),
+    Ground(CE=L("BAJA"))))
+    def rule_22(self):
+        print("\n\n")
+        print("==>")
+        print("     |-(1) Limitaciones de movimiento de agua")
+        print("     |-(2) Baja difusion de Oxigeno y flujo de gases")   
+        print("     |-(3) Baja mineralizacion de MO (Baja actvidad microbiologica")
+        print("     |-(4) Acumulacion de iones alcalinoterreos	")
+        print("     |-(5) Baja disponibilidad de elementos menores ")
+
+    @Rule(AND(Ground(arena=P(lambda arena: arena >=50.0)),
+    Ground(PH=L("LIGERAMENTE ALCALINO")),
+    Ground(CE=L("BAJA"))))
+    def rule_23(self):
+        print("\n\n")
+        print("==>")
+        print("     |-(1) Revisar las mediciones realizadas.")
+
+    @Rule(AND(Ground(limo=P(lambda limo: limo >=45.0)),
+    Ground(PH=L("LIGERAMENTE ALCALINO")),
+    Ground(CE=L("BAJA"))))
+    def rule_24(self):
+        print("\n\n")
+        print("==>")
+        print("     |-(1) Coloraciones grises suelo (Glaizeado)")
+        print("     |-(2) Suelo Hidromorfico")
+        print("     |-(3) Limitaciones fisicas temporales")
+        print("     |-(4) Baja difusion de Oxigeno y flujo de gases")
+        print("     |-(5) Baja disponibilidad de elementos menores ")
     
 engine = Drools()
 engine.reset()
