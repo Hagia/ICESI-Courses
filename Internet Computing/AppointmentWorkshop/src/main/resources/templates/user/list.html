@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>Users</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>Users</h1>
+			</div>
+		</div>
+		<div>
+			<div>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Mail</th>
+							<th>Birthday</th>
+							<th>Type</th>
+							<th>Gender</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:if="${users.empty}">
+							<td colspan="2">No hay usuarios</td>
+						</tr>
+						<tr th:each="user : ${users}">
+							<td><span th:text="${user.name}"> Name </span></td>
+							<td><span th:text="${user.mail}"> Mail </span></td>
+							<td><span th:text="${user.birthday}"> Birthday </span></td>
+							<td><span th:text="${user.type}"> Type </span></td>
+							<td><span th:text="${user.gender}"> Gender </span></td>
+							<td><a href="#" th:href="@{/edit/ +'${user.id}'">Id</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-6">
+				<a href="#" th:href="@{/crear}"> Add user </a> <a href="#"
+					th:href="@{/editar}"
+					th:classappend="${users.empty} ? 'disabled' : ''"> Edit
+					User </a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

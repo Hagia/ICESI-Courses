@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>Edit user</title>
+</head>
+<body>
+	<div>
+		<div>
+			<div>
+				<h1>Edit user</h1>
+			</div>
+
+			<div>
+				<a href="#" th:href="@{/list}"> Go back to list </a>
+				<form action="#" class="form-horizontal" th:action="@{/save}"
+					th:object="${form}" method="post">
+					<fieldset>
+						<span> <input type="submit" id="submitButton"
+							th:value="Save">
+						</span>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Mail</th>
+									<th>Type</th>
+									<th>Gender</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><input th:placeholder="Title" th:field="${user.name}" th:value="${user.name}"
+										required /></td>
+									<td><input th:placeholder="Mail" th:field="${user.mail}" th:value="${user.mail}"
+										required /></td>
+									<td><select th:field="${user.type}" th:value="${user.type}">
+											<option value="Doctor">Doctor</option>
+											<option value="Patient">Patient</option>
+									</select></td>
+									<td><select th:field="${user.gender}" th:value="${user.gender}">
+											<option value="Male">Male</option>
+											<option value="Female">Female</option>
+									</select></td>
+								</tr>
+							</tbody>
+						</table>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
