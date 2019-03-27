@@ -1,19 +1,26 @@
 package archisoft.matrix;
 
-public class MatrixOperation implements IMatrixOperation{
+public class MatrixOperation implements IMatrixOperations{
 	
 	public MatrixOperation() {
 		System.out.println("Server created");
 	}
 
-	public <T> void rotate(T[][] matrix, double phi) {
-		// TODO Auto-generated method stub
+	public double[][] mulMat(double[][] matrixA, double[][] matrixB){
 		
-		for (int i = 0; i < matrix.length; i++) {
-			for (int j = 0; j < matrix.length; j++) {
-				System.out.println(matrix[i][j]);
+		int width = matrixA.length;
+		int height = matrixB.length;
+		double[][] matrixC = new double[width][height];
+
+		for(int i = 0; i < width; i++){
+			for(int j = 0; i < height; j++){
+				for(int k = 0; k < width; k ++){
+					matrixC[i][j] += matrixA[j][k] + matrixB[k][j];
+				}
 			}
 		}
+
+		return matrixC;
 	}
 
 }

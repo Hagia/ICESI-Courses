@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -21,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/appointment")
 public class AppointmentController {
 
 	private static final String ROOT = "appointment";
@@ -45,7 +47,7 @@ public class AppointmentController {
 
 	}
 
-	@GetMapping("/edit/{id}")
+	@GetMapping("/edit{id}")
 	public ModelAndView edit(@PathVariable String id) {
 		Appointment a = ar.findById(Integer.parseInt(id)).get();
 		return new ModelAndView(ROOT + "/edit", "appointment", a);
@@ -58,7 +60,7 @@ public class AppointmentController {
 		return new RedirectView(ROOT + "/list");
 	}
 
-	@PostMapping("/delete/{id}")
+	@PostMapping("/delete{id}")
 	public RedirectView save(@PathVariable String id) {
 		ar.deleteById(Integer.parseInt(id));
 		return new RedirectView(ROOT + "/list");

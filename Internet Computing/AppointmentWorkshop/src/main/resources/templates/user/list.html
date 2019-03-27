@@ -31,13 +31,13 @@
 							<td><span th:text="${user.birthday}"> Birthday </span></td>
 							<td><span th:text="${user.type}"> Type </span></td>
 							<td><span th:text="${user.gender}"> Gender </span></td>
-							<td><a href="#" th:href="@{/edit/ +'${user.id}'">Id</a></td>
+							<td><a href="#" th:href="@{'edit/' + ${user.id}}">Id</a></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			<div class="col-md-6">
-				<a href="#" th:href="@{/crear}"> Add user </a> <a href="#"
+				<a href="#" th:href="@{add}"> Add user </a> <a href="#"
 					th:href="@{/editar}"
 					th:classappend="${users.empty} ? 'disabled' : ''"> Edit
 					User </a>

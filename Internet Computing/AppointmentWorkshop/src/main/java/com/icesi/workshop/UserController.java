@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.persistence.MappedSuperclass;
+
 import com.icesi.workshop.model.*;
 import com.icesi.workshop.database.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -16,9 +19,12 @@ import org.springframework.web.servlet.view.RedirectView;
 import lombok.RequiredArgsConstructor;
 
 
-@org.springframework.stereotype.Controller
 @RequiredArgsConstructor
+@Controller
+@RequestMapping("/user")
 public class UserController {
+	
+	private static final String ROOT = "user";
 	
 	@Autowired
 	private UserRepository ur;
@@ -26,19 +32,19 @@ public class UserController {
 	@GetMapping("/add")
 	public ModelAndView add() {		
 		User u =  new User();
-		return new ModelAndView("user/add", "user", u);
+		return new ModelAndView(ROOT+"/add", "user", u);
 	}
 
 	@GetMapping("/edit/{id}")
 	public ModelAndView edit(@PathVariable String id) {
 		User u =  ur.findById(Integer.parseInt(id)).get();
-		return new ModelAndView("user/edit", "user", u);
+		return new ModelAndView(ROOT +"/edit", "user", u);
 	}
 
-	@GetMapping("/delete/{id}")
+	@GetMapping("/delete")
 	public RedirectView delete(@PathVariable String id) {
 		ur.deleteById(Integer.parseInt(id));
-		return new RedirectView("/list");
+		return new RedirectView(ROOT +"/list");
 	}
 
 	@GetMapping("/list")
@@ -49,13 +55,13 @@ public class UserController {
 		while(iter.hasNext()) {
 			list.add(iter.next());
 		}
-		return new ModelAndView("list.html", "users", list);
+		return new ModelAndView(ROOT+"/list", "users", list);
 	}
 	
 	@PostMapping("/save")
 	public RedirectView save(@ModelAttribute User user) {
 		ur.save(user);
-		return new RedirectView("/list");
+		return new RedirectView("list");
 	}
 
 }
