@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.icesi.workshop.database.AppointmentRepository;
+import com.icesi.workshop.database.UserRepository;
 import com.icesi.workshop.model.Appointment;
 import com.icesi.workshop.model.User;
 
@@ -29,11 +30,26 @@ public class AppointmentController {
 
 	@Autowired
 	private AppointmentRepository ar;
+	
+	@Autowired
+	private UserRepository ur;
 
 	@GetMapping("/add")
 	public ModelAndView add() {
-		Appointment a = new Appointment();
-		return new ModelAndView(ROOT + "/add", "appointment", a);
+		Iterable<User> doctors = ur.findByType("Doctor");
+		Iterable<User> patients = ur.findByType("Patient");
+		ModelAndView mav = new ModelAndView();
+		for (User user : patients) {
+			System.out.println(user.getName());
+		}
+		for (User user : doctors) {
+			System.out.println(user.getName());
+		}
+		mav.addObject("doctors", doctors);
+		mav.addObject("patients", patients);
+		mav.setViewName(ROOT + "/add");
+	
+		return mav; 
 	}
 
 	@GetMapping("/list")

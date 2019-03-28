@@ -21,10 +21,9 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th>Name</th>
-									<th>Mail</th>
-									<th>Type</th>
-									<th>Gender</th>
+									<th>Doctor</th>
+									<th>Patient</th>
+									<th>Date</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -33,9 +32,8 @@
 										required /></td>
 									<td><input th:placeholder="Mail" th:field="${user.mail}"
 										required /></td>
-									<td><select th:field="${user.type}">
-											<option value="Doctor">Doctor</option>
-											<option value="Patient">Patient</option>
+									<td><select th:each= "doctor : ${doctors}">
+											<option th:text="${doctor.name}">Doctor</option>
 									</select></td>
 									<td><select th:field="${user.gender}">
 											<option value="Male">Male</option>
