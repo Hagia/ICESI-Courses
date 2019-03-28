@@ -41,10 +41,10 @@ public class UserController {
 		return new ModelAndView(ROOT + "/edit", "user", u);
 	}
 
-	@GetMapping("/delete")
+	@GetMapping("/delete/{id}")
 	public RedirectView delete(@PathVariable String id) {
 		ur.deleteById(Integer.parseInt(id));
-		return new RedirectView(ROOT + "/list");
+		return new RedirectView("http://localhost:8080/user/list");
 	}
 
 	@GetMapping("/list")

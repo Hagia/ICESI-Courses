@@ -20,21 +20,21 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:if="${users.empty}">
+						<tr th:if="${appointments.empty}">
 							<td colspan="2">There is no appointments</td>
 						</tr>
 						<tr th:each="appointment : ${appointments}">
 							<td><span th:text="${appointment.date}"> Date </span></td>
-							<td><span th:text="${appointment.patient}"> Patient </span></td>
-							<td><span th:text="${appointment.doctor}"> Doctor </span></td>
+							<td><span th:text="${appointment.patient.name}"> Patient </span></td>
+							<td><span th:text="${appointment.doctor.name}"> Doctor </span></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			<div class="col-md-6">
-				<a href="#" th:href="@{/crear}"> Add user </a> <a href="#"
-					th:href="@{/editar}"
-					th:classappend="${users.empty} ? 'disabled' : ''"> Edit
+				<a href="#" th:href="@{add}"> Add apointment </a> <a href="#"
+					th:href="@{edit}"
+					th:classappend="${appointments.empty} ? 'disabled' : ''"> Edit
 					appointment </a>
 			</div>
 		</div>

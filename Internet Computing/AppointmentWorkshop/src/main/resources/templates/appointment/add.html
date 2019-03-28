@@ -1,4 +1,4 @@
-<html>
+<html  xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>New user</title>
 </head>
@@ -6,17 +6,16 @@
 	<div>
 		<div>
 			<div>
-				<h1>Add user</h1>
+				<h1>New appointment</h1>
 			</div>
 
 			<div>
-				<a href="#" th:href="@{/list}"> Go back to list </a>
-				<form action="#" class="form-horizontal" th:action="@{/save}"
+				<a href="#" th:href="@{list}"> Go back to list </a>
+				<form action="#" class="form-horizontal" th:action="@{save}"
 					th:object="${form}" method="post">
 					<fieldset>
 						<span> <input type="submit" id="submitButton"
-							th:value="Save"> <input type="reset" id="resetButton"
-							th:value="Reset" />
+							th:value="Save">
 						</span>
 						<table class="table">
 							<thead>
@@ -24,21 +23,19 @@
 									<th>Doctor</th>
 									<th>Patient</th>
 									<th>Date</th>
+									<th>Time</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td><input th:placeholder="Title" th:field="${user.name}"
-										required /></td>
-									<td><input th:placeholder="Mail" th:field="${user.mail}"
-										required /></td>
-									<td><select th:each= "doctor : ${doctors}">
-											<option th:text="${doctor.name}">Doctor</option>
+									<td><select >
+											<option th:each= "doctor : ${doctors}" th:field="${appointment.doctor}" th:value="${doctor}" th:text = "${doctor}">Doctor</option>
 									</select></td>
-									<td><select th:field="${user.gender}">
-											<option value="Male">Male</option>
-											<option value="Female">Female</option>
+									<td><select >
+											<option th:each= "patient : ${patients}" th:field="${appointment.patient}" th:value="${patient}" th:text = "${patient}">Doctor</option>
 									</select></td>
+									<td><input type="date" th:field="${appointment.date}">  </td>
+									<td><input type="time" th:field="${appointment.hour}">  </td>
 								</tr>
 							</tbody>
 						</table>

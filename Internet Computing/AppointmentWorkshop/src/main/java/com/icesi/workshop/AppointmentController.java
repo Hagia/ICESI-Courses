@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,11 +34,13 @@ public class AppointmentController {
 	
 	@Autowired
 	private UserRepository ur;
+	
 
 	@GetMapping("/add")
 	public ModelAndView add() {
 		Iterable<User> doctors = ur.findByType("Doctor");
 		Iterable<User> patients = ur.findByType("Patient");
+		Appointment m = new Appointment();
 		ModelAndView mav = new ModelAndView();
 		for (User user : patients) {
 			System.out.println(user.getName());
@@ -47,6 +50,7 @@ public class AppointmentController {
 		}
 		mav.addObject("doctors", doctors);
 		mav.addObject("patients", patients);
+		mav.addObject("appointment", m);
 		mav.setViewName(ROOT + "/add");
 	
 		return mav; 
@@ -73,13 +77,13 @@ public class AppointmentController {
 	@PostMapping("/save")
 	public RedirectView save(@ModelAttribute Appointment appointment) {
 		ar.save(appointment);
-		return new RedirectView(ROOT + "/list");
+		return new RedirectView("http://localhost:8080/appointment/list");
 	}
 
-	@PostMapping("/delete{id}")
-	public RedirectView save(@PathVariable String id) {
-		ar.deleteById(Integer.parseInt(id));
-		return new RedirectView(ROOT + "/list");
-	}
+//	@GetMapping("/delete{id}")
+//	public RedirectView save(@PathVariable String id) {
+//		ar.deleteById(Integer.parseInt(id));
+//		return new RedirectView(ROOT + "/list");
+//	}
 
 }
