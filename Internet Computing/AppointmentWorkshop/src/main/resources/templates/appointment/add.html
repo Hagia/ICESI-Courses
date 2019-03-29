@@ -12,7 +12,7 @@
 			<div>
 				<a href="#" th:href="@{list}"> Go back to list </a>
 				<form action="#" class="form-horizontal" th:action="@{save}"
-					th:object="${form}" method="post">
+					th:object="${appointment}" method="post">
 					<fieldset>
 						<span> <input type="submit" id="submitButton"
 							th:value="Save">
@@ -28,11 +28,15 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td><select >
-											<option th:each= "doctor : ${doctors}" th:field="${appointment.doctor}" th:value="${doctor}" th:text = "${doctor}">Doctor</option>
+									<td><select th:each= "doctor : ${doctors}" th:field="*{doctor}">
+										<option th:value="${doctor.getUser()}" th:text="${doctor}">Doctor
+										</option>
+											
 									</select></td>
-									<td><select >
-											<option th:each= "patient : ${patients}" th:field="${appointment.patient}" th:value="${patient}" th:text = "${patient}">Doctor</option>
+									<td><select th:each="patient : ${patients}" th:field="*{patient}">
+										<option th:value="${patient}" th:text="${patient}">Doctor
+										</option>
+											
 									</select></td>
 									<td><input type="date" th:field="${appointment.date}">  </td>
 									<td><input type="time" th:field="${appointment.hour}">  </td>

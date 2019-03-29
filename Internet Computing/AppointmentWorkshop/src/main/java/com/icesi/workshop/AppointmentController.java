@@ -40,17 +40,12 @@ public class AppointmentController {
 	public ModelAndView add() {
 		Iterable<User> doctors = ur.findByType("Doctor");
 		Iterable<User> patients = ur.findByType("Patient");
-		Appointment m = new Appointment();
+		Appointment appointment = new Appointment();
 		ModelAndView mav = new ModelAndView();
-		for (User user : patients) {
-			System.out.println(user.getName());
-		}
-		for (User user : doctors) {
-			System.out.println(user.getName());
-		}
+		
 		mav.addObject("doctors", doctors);
 		mav.addObject("patients", patients);
-		mav.addObject("appointment", m);
+		mav.addObject("appointment", appointment);
 		mav.setViewName(ROOT + "/add");
 	
 		return mav; 
@@ -76,14 +71,11 @@ public class AppointmentController {
 
 	@PostMapping("/save")
 	public RedirectView save(@ModelAttribute Appointment appointment) {
+		System.out.println(appointment.getPatient().getName());
+		System.out.println(appointment.getDoctor().getName());
 		ar.save(appointment);
 		return new RedirectView("http://localhost:8080/appointment/list");
 	}
 
-//	@GetMapping("/delete{id}")
-//	public RedirectView save(@PathVariable String id) {
-//		ar.deleteById(Integer.parseInt(id));
-//		return new RedirectView(ROOT + "/list");
-//	}
-
+//	
 }

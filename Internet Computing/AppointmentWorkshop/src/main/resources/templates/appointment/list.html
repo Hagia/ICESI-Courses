@@ -26,7 +26,7 @@
 						<tr th:each="appointment : ${appointments}">
 							<td><span th:text="${appointment.date}"> Date </span></td>
 							<td><span th:text="${appointment.patient.name}"> Patient </span></td>
-							<td><span th:text="${appointment.doctor.name}"> Doctor </span></td>
+							<td><span th:text="${appointment.doctor}"> Doctor </span></td>
 						</tr>
 					</tbody>
 				</table>

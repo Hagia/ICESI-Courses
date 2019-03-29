@@ -33,8 +33,9 @@ public class User{
 	@NonNull
 	private Date birthday;
 	
-	public String toString() {
-		return name;
+	
+	public User getUser() {
+		return this;
 	}
 
 }
