@@ -10,9 +10,8 @@
 			</div>
 
 			<div>
-				<a href="#" th:href="@{/list}"> Go back to list </a>
-				<form action="#" class="form-horizontal" th:action="@{/save}"
-					th:object="${form}" method="post">
+				<form action="#" class="form-horizontal" th:action="@{http://localhost:8080/appointment/save}"
+					th:object="${appointment}" method="post">
 					<fieldset>
 						<span> <input type="submit" id="submitButton"
 							th:value="Save">
@@ -28,11 +27,18 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td><input th:placeholder="Title" th:field="${appointment.name}" th:value="${user.name}"
-										required /></td>
-									<td><input th:placeholder="Mail" th:field="${appointment.mail}" th:value="${user.mail}"
-										required /></td>
-									<td><input type="date" th:field="${appointment.date}"></td>
+									<td><select th:each= "doctor : ${doctors}" th:field="*{doctor}">
+										<option th:value="${doctor.id}" th:text="${doctor}">Doctor
+										</option>
+											
+									</select></td>
+									<td><select th:each="patient : ${patients}" th:field="*{patient}">
+										<option th:value="${patient.id}" th:text="${patient}">Doctor
+										</option>
+											
+									</select></td>
+									<td><input type="date" th:field="${appointment.date}">  </td>
+									<td><input type="time" th:field="${appointment.hour}">  </td>
 								</tr>
 							</tbody>
 						</table>

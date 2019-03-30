@@ -11,4 +11,5 @@ import com.icesi.workshop.model.Appointment;
 public interface AppointmentRepository extends CrudRepository<Appointment, Integer>{
 	
 	Optional<Appointment> findById(Long id);
+	
 }

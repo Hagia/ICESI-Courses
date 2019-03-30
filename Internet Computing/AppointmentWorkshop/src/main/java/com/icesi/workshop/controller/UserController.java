@@ -1,4 +1,4 @@
-package com.icesi.workshop;
+package com.icesi.workshop.controller;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -17,16 +17,28 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
 	private static final String ROOT = "user";
+	
+	private boolean delete;
 
 	@Autowired
 	private UserRepository ur;
+	
+	@Autowired
+	private AppointmentRepository ar;
 
+	private boolean update;
+	
+	public UserController() {
+		delete = true;
+		update = true;
+	}
+	
+	
 	@GetMapping("/add")
 	public ModelAndView add() {
 		User u = new User();
@@ -35,15 +47,42 @@ public class UserController {
 
 	@GetMapping("/edit/{id}")
 	public ModelAndView edit(@PathVariable String id) {
-		User u = ur.findById(Integer.parseInt(id)).get();
-		ur.deleteById(Integer.parseInt(id));
+		User user = ur.findById(Integer.parseInt(id)).get();
+		Iterable<Appointment> list = ar.findAll();
+		update = true;
+		delete = true;
+		for (Appointment appointment : list) {
+			if(user.getId() == appointment.getDoctor().getId() || user.getId() == appointment.getPatient().getId()) {
+				update = false;
+			}
+		}
+		if(update)
+			ur.delete(user);
+		return new ModelAndView(ROOT + "/edit", "user", user);
+		
 
-		return new ModelAndView(ROOT + "/edit", "user", u);
+		
+	}
+	
+	
+	public RedirectView redirect() {
+		return new RedirectView("http://localhost:8080/users");
 	}
 
 	@GetMapping("/delete/{id}")
 	public RedirectView delete(@PathVariable String id) {
-		ur.deleteById(Integer.parseInt(id));
+		
+		User user = ur.findById(Integer.parseInt(id)).get();
+		Iterable<Appointment> list = ar.findAll();
+		update = true;
+		delete = true;
+		for (Appointment appointment : list) {
+			if(user.getId() == appointment.getDoctor().getId() || user.getId() == appointment.getPatient().getId()) {
+				delete = false;
+			}
+		}
+		if(delete)
+			ur.deleteById(Integer.parseInt(id));
 		return new RedirectView("http://localhost:8080/user/list");
 	}
 
@@ -55,12 +94,19 @@ public class UserController {
 		while (iter.hasNext()) {
 			list.add(iter.next());
 		}
-		return new ModelAndView(ROOT + "/list", "users", list);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("delete", delete);
+		mav.addObject("update", update);
+		mav.addObject("users", list);
+		mav.setViewName(ROOT + "/list");
+		return mav;
 	}
 
 	@PostMapping("/save")
 	public RedirectView save(@ModelAttribute User user) {
-		ur.save(user);
+		if(update)
+			ur.save(user);
 		return new RedirectView("list");
 	}
 

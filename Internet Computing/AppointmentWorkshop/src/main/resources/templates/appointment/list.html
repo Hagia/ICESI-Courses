@@ -1,6 +1,7 @@
 <html>
 <head>
 <title>Appointments</title>
+	
 </head>
 <body>
 	<div class="container">
@@ -13,8 +14,9 @@
 			<div>
 				<table>
 					<thead>
-						<tr>
+						<tr th:if="${!appointments.empty}">
 							<th>Date</th>
+							<th>Time</th>
 							<th>Patient</th>
 							<th>Doctor</th>
 						</tr>
@@ -23,19 +25,29 @@
 						<tr th:if="${appointments.empty}">
 							<td colspan="2">There is no appointments</td>
 						</tr>
+						<tr th:if="${!isPossible}">
+							<h3>There are no patients or doctor for appointments</h3>
+						</tr>
 						<tr th:each="appointment : ${appointments}">
 							<td><span th:text="${appointment.date}"> Date </span></td>
-							<td><span th:text="${appointment.patient.name}"> Patient </span></td>
-							<td><span th:text="${appointment.doctor}"> Doctor </span></td>
+							<td><span th:text="${appointment.hour}"> Date </span></td>
+							<td><span th:text="${appointment.patient.name}">
+									Patient </span></td>
+							<td><span th:text="${appointment.doctor.name}">
+									Doctor </span></td>
+							<td><a href="#" th:href="@{'edit/' + ${appointment.id}}">Edit</a>
+								<a href="#" th:href="@{'delete/' + ${appointment.id}}">Delete</a>
+							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			<div class="col-md-6">
-				<a href="#" th:href="@{add}"> Add apointment </a> <a href="#"
-					th:href="@{edit}"
-					th:classappend="${appointments.empty} ? 'disabled' : ''"> Edit
-					appointment </a>
+				<a href="#" th:href="@{add}"> Add apointment </a>
+
+			</div>
+			<div>
+				<a href="#" th:href="@{http://localhost:8080}"> Main page </a>
 			</div>
 		</div>
 	</div>

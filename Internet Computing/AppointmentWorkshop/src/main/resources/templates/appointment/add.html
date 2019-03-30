@@ -1,4 +1,4 @@
-<html  xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>New user</title>
 </head>
@@ -28,18 +28,21 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td><select th:each= "doctor : ${doctors}" th:field="*{doctor}">
-										<option th:value="${doctor.getUser()}" th:text="${doctor}">Doctor
-										</option>
-											
+									<td><select th:field="*{doctor}">
+											<option th:each="doctor : ${doctors}" th:value="${doctor.id}"
+												th:text="${doctor.name}">Doctor</option>
+
 									</select></td>
-									<td><select th:each="patient : ${patients}" th:field="*{patient}">
-										<option th:value="${patient}" th:text="${patient}">Doctor
-										</option>
-											
+									<td><select th:field="*{patient}">
+											<option th:each="patient : ${patients}"
+												th:value="${patient.id}" th:text="${patient.name}">Doctor
+											</option>
+
 									</select></td>
-									<td><input type="date" th:field="${appointment.date}">  </td>
-									<td><input type="time" th:field="${appointment.hour}">  </td>
+									<td><input type="date" th:field="${appointment.date}">
+									</td>
+									<td><input type="time" th:field="${appointment.hour}">
+									</td>
 								</tr>
 							</tbody>
 						</table>

@@ -13,7 +13,7 @@
 			<div>
 				<table>
 					<thead>
-						<tr>
+						<tr th:if="${!users.empty}">
 							<th>Name</th>
 							<th>Mail</th>
 							<th>Birthday</th>
@@ -26,6 +26,8 @@
 						<tr th:if="${users.empty}">
 							<td colspan="2">No hay usuarios</td>
 						</tr>
+						
+						
 						<tr th:each="user : ${users}">
 							<td><span th:text="${user.name}"> Name </span></td>
 							<td><span th:text="${user.mail}"> Mail </span></td>
@@ -36,11 +38,18 @@
 							<a href="#" th:href="@{'delete/' + ${user.id}}">Delete</a>
 							</td>
 						</tr>
+						<tr th:if="${!delete or !update}">
+							<h3 color="red" >User is linked to an appointment</h3>
+						</tr>
 					</tbody>
 				</table>
 			</div>
 			<div class="col-md-6">
 				<a href="#" th:href="@{add}"> Add user </a>
+							
+			</div>
+			<div>
+				<a href="#" th:href="@{http://localhost:8080}"> Main page </a>
 			</div>
 		</div>
 	</div>
