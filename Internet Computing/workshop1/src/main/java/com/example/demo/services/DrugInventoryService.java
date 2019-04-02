@@ -15,34 +15,15 @@ import lombok.NonNull;
 public class DrugInventoryService {
 	
 	private DrugInventoryRepository inventaryRepository;
-	
-	public DrugInventoryService() {
-		inventaryRepository = new DrugInventoryRepository();
-	}
-	
-	public DrugInventory find(@NonNull DrugInventory drugInventary) {
+
+	public DrugInventory find(DrugSupply supply) {
 		// TODO Auto-generated method stub
-		return inventaryRepository.find(drugInventary.getDrug());
-	}
-	
-	public DrugInventory find(@NonNull DrugSupply drugSupply) {
-		// TODO Auto-generated method stub
-		return inventaryRepository.find(drugSupply.getDrug());
+		return null;
 	}
 
-	public DrugInventory update(DrugInventory drugInventary) {
+	public void update(DrugInventory di) {
 		// TODO Auto-generated method stub
-		return inventaryRepository.update(drugInventary);
-	}
-
-	public DrugInventory create(DrugInventory drugInventary) {
-		// TODO Auto-generated method stub
-		return inventaryRepository.create(drugInventary);
 		
-	}
-	
-	public void clear() {
-		inventaryRepository.clear();
 	}
 	
 

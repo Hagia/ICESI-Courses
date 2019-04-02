@@ -11,23 +11,10 @@ import lombok.NonNull;
 public class PatientService {
 	
 	private PatientRepository pacientRepository;
-	
-	public PatientService() {
-		pacientRepository = new PatientRepository();
-	}
 
 	public Patient find(@NonNull Patient pacient) {
 		// TODO Auto-generated method stub
-		return pacientRepository.find(pacient);
-	}
-
-	public Patient create(Patient pacient) {
-		// TODO Auto-generated method stub
-		return pacientRepository.create(pacient);
+		return null;
 	}
 	
-	public void clear() {
-		pacientRepository.clear();
-	}
-
 }

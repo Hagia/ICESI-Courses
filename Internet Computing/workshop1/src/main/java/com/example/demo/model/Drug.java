@@ -1,14 +1,17 @@
 package com.example.demo.model;
 
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import lombok.*;
 
 @Data
+@Entity
 public class Drug {
 
 	@NonNull
-	private String id;
+	@Id
+	private Long id;
 	@NonNull
 	private String name;
 	@NonNull

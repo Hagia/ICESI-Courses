@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="text-center">
+		<h3>
+			<strong>LOGIN</strong>
+		</h3>
+
+		<form action="loginDo" >
+			<div>
+				<img src="avatar.png"> </img>
+			</div>,
+			<div class="md-form">
+				<label> <b>Username</b>
+				</label> <input type="text" placeholder="User" th:field="${user.login}">
+			</div>
+
+			<div class="md-form">
+				<label> <b>Password</b>
+				</label> <input type="password" placeholder="Password" th:field="${user.password}">
+			</div>
+
+			<div>
+				<button type="submit" href="#" th:href="loginDo">Login</button>
+			</div>
+
+		</form>
+	</div>
+</body>
+</html>

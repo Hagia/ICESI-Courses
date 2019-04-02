@@ -12,19 +12,10 @@ import lombok.NonNull;
 public class DrugService {
 	
 	private DrugRepository drugRepository;
-	
-	public DrugService() {
-		drugRepository = new DrugRepository();
-	}
 
 	public Drug find(@NonNull Drug drug) {
 		// TODO Auto-generated method stub
-		return drugRepository.find(drug);
+		return null;
 	}
-
-	public Drug create(Drug drug) {
-		// TODO Auto-generated method stub
-		return drugRepository.create(drug);
-	}
-
+	
 }

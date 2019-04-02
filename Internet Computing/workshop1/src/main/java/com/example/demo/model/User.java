@@ -1,9 +1,12 @@
 package com.example.demo.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 @Data
+@NoArgsConstructor
 public class User {
+	private Long id;
 	@NonNull
 	private String login;
 	@NonNull
