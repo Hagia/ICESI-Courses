@@ -13,17 +13,33 @@
 						<tr>
 							<th>Drug
 							<th>Patient
+							<th>Amount
 							<th>Observation
 							<th>Patology
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>
+							<td><select>
+									<option th:if="${drugs.empty}" text="No drugs">No drugs
+									<option th:each="drug : ${drugs}" th:text="${drug.name}"
+										th:value="${drug.id}">
+							</select>
+							<td><select>
+									<option th:if="${patients.empty}" text="No patients">No patients
+									<option th:each="patient : ${patients}"
+										th:text="${patient.name}" th:value="${patient.id}">
+							</select>
+							<td><input type=text>
+							<td><input type="text">
+							<td><input type="text">
 						</tr>
 					</tbody>
 				</table>
+				<button>Save</button>
 			</fieldset>
+			
+			<a href="#" th:href="@{/home}">Home page</a>
 		</form>
 	</div>
 </body>
