@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.demo.repository.DrugSupplyRepository;
 import com.example.demo.services.DrugSupplyService;
+import com.example.demo.services.UserService;
 
 @SpringBootApplication
 public class WorkshopApplication {

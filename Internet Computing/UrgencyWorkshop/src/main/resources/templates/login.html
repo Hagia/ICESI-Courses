@@ -13,18 +13,19 @@
 			<strong>LOGIN</strong>
 		</h3>
 
-		<form action="loginDo" >
+		<form action="#" th:action="@{loginDo}"
+					th:object="${user}" method="post">
 			<div>
 				<img src="avatar.png"> </img>
 			</div>,
 			<div class="md-form">
 				<label> <b>Username</b>
-				</label> <input type="text" placeholder="User" th:field="${user.login}">
+				</label> <input type="text" placeholder="User" th:field="*{login}">
 			</div>
 
 			<div class="md-form">
 				<label> <b>Password</b>
-				</label> <input type="password" placeholder="Password" th:field="${user.password}">
+				</label> <input type="password" placeholder="Password" th:field="*{password}">
 			</div>
 
 			<div>
