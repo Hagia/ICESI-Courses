@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.Query;
 import com.example.demo.model.User;
 import com.example.demo.services.DrugService;
 import com.example.demo.services.UserService;
@@ -52,6 +53,17 @@ public class MainController {
 		model.addAttribute("drugs", ds.findAll());
 		
 		return "drugDelivery";
+	}
+	
+	@GetMapping("/home")
+	public String home(Model model) {
+		model.addAttribute("query", new Query());
+		return "home";
+	}
+	
+	@GetMapping("/patientService")
+	public String patientService() {
+		return "patientService";
 	}
 
 	@GetMapping("/")

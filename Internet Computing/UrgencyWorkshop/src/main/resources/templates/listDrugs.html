@@ -2,9 +2,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Supplies</title>
 </head>
 <body>
-
+	<div>
+		<div>
+			<table>
+				<thead>
+					<tr>
+						<th>Drug
+						<th>Patient
+						<th>Amount
+						<th>Observation
+						<th>Patology
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="supply : ${supplies}">
+						<td th:text="${supply.name}">
+						<td th:text="${supply.patient.name}">
+						<td th:text="${supply.amount}">
+						<td th:text="${supply.observation}">
+						<td th:text="${supply.patology}">
+				</tbody>
+			</table>
+		</div>
+	</div>
 </body>
 </html>

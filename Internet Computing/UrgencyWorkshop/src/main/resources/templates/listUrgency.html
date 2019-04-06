@@ -2,9 +2,36 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Services</title>
 </head>
 <body>
-
+	<div>
+		<div>
+			<table>
+				<thead>
+					<tr>
+						<th>Patient
+						<th>General description
+						<th>Procedure
+						<th>Dispatch
+						<th>Location
+						<th>Observation
+						<th>Drug supplied
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="service : ${services}">
+						<td th:text="${service.patient.name}"></td>
+						<td th:text="${service.description}"></td>
+						<td><input type="checkbox" th:checked="${service.dispatch}"></td>
+						<td th:text="${service.dispatchPlace}"></td>
+						<td th:text="${service.observation}"></td>
+						<td th:each="drug : ${service.supplies}"><span
+							th:text="${drug.name}"></span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </body>
 </html>

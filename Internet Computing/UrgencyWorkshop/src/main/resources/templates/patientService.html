@@ -2,9 +2,46 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Patient service</title>
 </head>
 <body>
+	<div>
+		<form action="#">
+			<fieldset>
+				<table>
+					<thead>
+						<tr>
+							<th>Patient
+							<th>General description
+							<th>Procedure
+							<th>Dispatch
+							<th>Location
+							<th>Observation
+							<th>Drug supplied
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><select>
 
+									<option th:each="patient : ${patients}"
+										th:text="${patient.name}" th:value="${patient.id}">
+							</select>
+							<td><input type=text>
+							<td><input type="text">
+							<td><input type="checkbox">
+							<td><input type="text">
+							<td><input type="text">
+							<td><input type="text" th:each="drug :${drugs}"
+								th:text="${drug.name}">
+						</tr>
+					</tbody>
+				</table>
+				<button>Save</button>
+			</fieldset>
+
+			<a href="#" th:href="@{/home}">Home page</a>
+		</form>
+	</div>
 </body>
 </html>
