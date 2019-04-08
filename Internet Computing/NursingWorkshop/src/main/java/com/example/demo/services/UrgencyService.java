@@ -16,14 +16,19 @@ public class UrgencyService {
 
 	@Autowired
 	private UrgencyRepository urgencyRepository;
-	
-	public List<Urgency> findAllByDate(Date date){
+
+	public List<Urgency> findAllByDate(Date date) {
 		List<Urgency> lis = new ArrayList<Urgency>();
 		Iterator<Urgency> iter = urgencyRepository.findAllByDate(date).iterator();
-		while(iter.hasNext()) {
+		while (iter.hasNext()) {
 			lis.add(iter.next());
 		}
 		return lis;
+	}
+
+	public Urgency create(Urgency drugSupply) {
+		// TODO Auto-generated method stub
+		return urgencyRepository.save(drugSupply);
 	}
 
 }

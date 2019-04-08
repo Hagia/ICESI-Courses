@@ -8,7 +8,7 @@
 	<div>
 		<form action="#">
 			<fieldset>
-				<legend>Service information</legend>
+				<legend>Service registration</legend>
 				<table>
 					<thead>
 						<tr>
@@ -29,9 +29,9 @@
 							</select>
 							<td><input type=text>
 							<td><input type="text">
+							<td><input type="text">
+							<td><input type="text">
 							<td><input type="checkbox">
-							<td><input type="text">
-							<td><input type="text">
 							<td><select>
 									<option th:each="drug : ${drugs}" th:text="${drug.name}"
 										th:value="${drug.id}">

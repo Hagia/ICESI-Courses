@@ -13,15 +13,17 @@
 						<th>Drug
 						<th>Patient
 						<th>Amount
+						<th>Date
 						<th>Observation
 						<th>Patology
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="supply : ${supplies}">
-						<td th:text="${supply.name}">
+						<td th:text="${supply.amount}">
 						<td th:text="${supply.patient.name}">
 						<td th:text="${supply.amount}">
+						<td th:text="${supply.date}">
 						<td th:text="${supply.observation}">
 						<td th:text="${supply.patology}">
 				</tbody>

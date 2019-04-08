@@ -34,5 +34,10 @@ public class DrugService {
 		
 		return drugs;
 	}
+
+	public Drug create(Drug drug) {
+		// TODO Auto-generated method stub
+		return dr.save(drug);
+	}
 	
 }

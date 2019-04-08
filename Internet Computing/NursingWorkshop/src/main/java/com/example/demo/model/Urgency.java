@@ -11,10 +11,12 @@ import javax.persistence.OneToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Data
 @Entity
 @NoArgsConstructor
+@RequiredArgsConstructor
 public class Urgency {
 	@Id
 	private Long key;
@@ -31,10 +33,11 @@ public class Urgency {
 	private String procedure;
 	@NonNull
 	private Boolean dispacth;
-	@NonNull
+	
 	private String dispatchPlace;
 	@NonNull
 	private String observation;
+	
 	@OneToMany
 	private List<DrugSupply> supplies;
 

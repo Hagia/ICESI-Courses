@@ -5,9 +5,11 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.swing.JSpinner.DateEditor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +26,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.Query;
+import com.example.demo.model.Drug;
 import com.example.demo.model.DrugSupply;
+import com.example.demo.model.Patient;
 import com.example.demo.model.Urgency;
 import com.example.demo.model.User;
 import com.example.demo.services.DrugService;
 import com.example.demo.services.DrugSupplyService;
+import com.example.demo.services.PatientService;
 import com.example.demo.services.UrgencyService;
 import com.example.demo.services.UserService;
 import com.fasterxml.jackson.core.format.DataFormatDetector;
@@ -48,12 +53,21 @@ public class MainController {
 
 	@Autowired
 	private UrgencyService ugs;
+	
+	@Autowired
+	private PatientService ps;
 
+	@PostConstruct
 	private void setUp() {
 		User u1 = new User("lola", "Mauricio", "Hernández", "lola", Boolean.FALSE);
-		User u2 = new User("sara", "Diana", "Hernández", "sara", Boolean.TRUE);
 		us.add(u1);
-		us.add(u2);
+		
+		Patient p = new Patient("1234", "lola", "lola", Boolean.FALSE);
+		ps.create(p);
+		
+		Drug d = new Drug("lola", "lola", "lols", "noceh", "ND");
+		ds.create(d);
+		
 	}
 
 	@PostMapping("/loginDo")
@@ -77,8 +91,8 @@ public class MainController {
 
 	@GetMapping("drugDelivery")
 	public String drugDelivery(Model model) {
-		setUp();
-		model.addAttribute("patients", us.findAll());
+		
+		model.addAttribute("patients", ps.findAll());
 		model.addAttribute("drugs", ds.findAll());
 		model.addAttribute("supply", new DrugSupply());
 
@@ -87,8 +101,8 @@ public class MainController {
 
 	@GetMapping("/patientService")
 	public String patientService(Model model) {
-		model.addAttribute("patients", us.findAll());
-		model.addAttribute("srevice", new Urgency());
+		model.addAttribute("patients", ps.findAll());
+		model.addAttribute("service", new Urgency());
 		return "patientService";
 	}
 
@@ -113,12 +127,23 @@ public class MainController {
 	public String saveSupply(Model model, @ModelAttribute DrugSupply drugSupply) {
 		Calendar c = Calendar.getInstance();
 		Date date = new Date(c.get(Calendar.YEAR)-1900, c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
-		System.out.println(date.toString());
+		
 		drugSupply.setDate(date);
 		dss.create(drugSupply);
 		return "home";
 	}
 
+	@PostMapping("/saveService")
+	public String saveService(Model model, @ModelAttribute Urgency drugSupply) {
+		Calendar c = Calendar.getInstance();
+		Date date = new Date(c.get(Calendar.YEAR)-1900, c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+		
+		drugSupply.setDate(date);
+		ugs.create(drugSupply);
+		return "home";
+	}
+
+	
 	@GetMapping("/")
 	public ModelAndView main() {
 		setUp();

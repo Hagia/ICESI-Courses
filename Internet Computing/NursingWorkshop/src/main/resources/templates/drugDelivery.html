@@ -21,28 +21,28 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><select>
-									<option th:if="${drugs.empty}" text="No drugs">No
+							<td><select th:field="${supply.drug}">
+									<option th:if="${drugs.empty}" th:value="null" text="No drugs">No
 										drugs
-									<option th:each="drug : ${drugs}" th:text="${drug.name}"
-										th:value="${drug.id}">
+									<option th:each="drug : ${drugs}" th:value="${drug.id}"
+										th:text="${drug.name}">
 							</select>
-							<td><select>
-									<option th:if="${patients.empty}" text="No patients">No
-										patients
+							<td><select th:field="${supply.patient}">
+									<option th:if="${patients.empty}" th:value="null"
+										text="No patients">No patients
 									<option th:each="patient : ${patients}"
-										th:text="${patient.name}" th:value="${patient.login}">
+										th:value="${patient.id}" th:text="${patient.name}">
 							</select>
-							<td><input type=text>
-							<td><input type="text">
-							<td><input type="text">
+							<td><input th:field="${supply.amount}" type=text>
+							<td><input th:field="${supply.observation}" type="text">
+							<td><input th:field="${supply.patology}" type="text">
 						</tr>
 					</tbody>
 				</table>
 				<button type="submit">Save</button>
 			</fieldset>
 
-			
+
 		</form>
 		<a href="#" th:href="@{/home}">Home page</a>
 	</div>

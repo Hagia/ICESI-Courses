@@ -28,9 +28,12 @@ public class DrugSupply {
 	@NonNull
 	@OneToOne
 	private Drug drug;
+	
 	@NonNull
-	@OneToOne
-	private Patient pacient;
+	private Integer amount;
+	@NonNull
+	@OneToOne	
+	private Patient patient;
 	@NonNull
 	private Date date;
 	
