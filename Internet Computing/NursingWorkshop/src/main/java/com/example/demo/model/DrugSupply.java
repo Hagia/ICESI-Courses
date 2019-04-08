@@ -1,32 +1,40 @@
 package com.example.demo.model;
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+
 @Data
+@Entity
 @NoArgsConstructor
 @RequiredArgsConstructor
-@Entity
-public class User {
-	
+@ToString
+public class DrugSupply {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private Long key;
 	@NonNull
-	private String login;
+	private String id;
 	@NonNull
-	private String name;
+	@OneToOne
+	private Drug drug;
 	@NonNull
-	private String lastName;
+	@OneToOne
+	private Patient pacient;
 	@NonNull
-	private String password;
+	private Date date;
+	
+	private String observation;
 	@NonNull
-	private Boolean status;
-
+	private String patology;
 }

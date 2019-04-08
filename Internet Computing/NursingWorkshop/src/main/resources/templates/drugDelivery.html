@@ -6,8 +6,9 @@
 </head>
 <body>
 	<div>
-		<form action="">
+		<form action="" th:action="@{/saveSupply}" method="post">
 			<fieldset>
+				<legend>Supply information</legend>
 				<table>
 					<thead>
 						<tr>
@@ -30,7 +31,7 @@
 									<option th:if="${patients.empty}" text="No patients">No
 										patients
 									<option th:each="patient : ${patients}"
-										th:text="${patient.name}" th:value="${patient.id}">
+										th:text="${patient.name}" th:value="${patient.login}">
 							</select>
 							<td><input type=text>
 							<td><input type="text">
@@ -38,11 +39,12 @@
 						</tr>
 					</tbody>
 				</table>
-				<button>Save</button>
+				<button type="submit">Save</button>
 			</fieldset>
 
-			<a href="#" th:href="@{/home}">Home page</a>
+			
 		</form>
+		<a href="#" th:href="@{/home}">Home page</a>
 	</div>
 </body>
 </html>

@@ -8,6 +8,7 @@
 	<div>
 		<form action="#">
 			<fieldset>
+				<legend>Service information</legend>
 				<table>
 					<thead>
 						<tr>
@@ -23,7 +24,6 @@
 					<tbody>
 						<tr>
 							<td><select>
-
 									<option th:each="patient : ${patients}"
 										th:text="${patient.name}" th:value="${patient.id}">
 							</select>
@@ -32,8 +32,10 @@
 							<td><input type="checkbox">
 							<td><input type="text">
 							<td><input type="text">
-							<td><input type="text" th:each="drug :${drugs}"
-								th:text="${drug.name}">
+							<td><select>
+									<option th:each="drug : ${drugs}" th:text="${drug.name}"
+										th:value="${drug.id}">
+							</select>
 						</tr>
 					</tbody>
 				</table>

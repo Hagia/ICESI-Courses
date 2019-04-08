@@ -1,19 +1,29 @@
 package com.example.demo.model;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Data
+@Entity
+@NoArgsConstructor
 public class Urgency {
-
+	@Id
+	private Long key;
 	@NonNull
 	private String id;
 	@NonNull
 	private Date date;
 	@NonNull
+	@OneToOne
 	private Patient pacient;
 	@NonNull
 	private String description;
@@ -25,7 +35,7 @@ public class Urgency {
 	private String dispatchPlace;
 	@NonNull
 	private String observation;
-	
+	@OneToMany
 	private List<DrugSupply> supplies;
 
 }
