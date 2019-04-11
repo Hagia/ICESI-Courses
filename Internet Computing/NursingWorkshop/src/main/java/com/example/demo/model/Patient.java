@@ -9,12 +9,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+
 @Data
 @Entity
 @NoArgsConstructor
 @RequiredArgsConstructor
 public class Patient {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -24,11 +25,11 @@ public class Patient {
 	private String name;
 	@NonNull
 	private String lastName;
-	
+
 	private String program;
-	
+
 	private String academyDenpendency;
 	@NonNull
 	private Boolean status;
-	
+
 }

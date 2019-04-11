@@ -18,7 +18,6 @@ import lombok.ToString;
 @Entity
 @NoArgsConstructor
 @RequiredArgsConstructor
-@ToString
 public class DrugSupply {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,16 +27,21 @@ public class DrugSupply {
 	@NonNull
 	@OneToOne
 	private Drug drug;
-	
+
 	@NonNull
 	private Integer amount;
 	@NonNull
-	@OneToOne	
+	@OneToOne
 	private Patient patient;
 	@NonNull
 	private Date date;
-	
+
 	private String observation;
 	@NonNull
 	private String patology;
+
+	@Override
+	public String toString() {
+		return drug.getName() + " " + amount.toString();
+	}
 }

@@ -26,9 +26,9 @@ public class UrgencyService {
 		return lis;
 	}
 
-	public Urgency create(Urgency drugSupply) {
+	public Urgency create(Urgency urgency) {
 		// TODO Auto-generated method stub
-		return urgencyRepository.save(drugSupply);
+		return urgencyRepository.save(urgency);
 	}
 
 }

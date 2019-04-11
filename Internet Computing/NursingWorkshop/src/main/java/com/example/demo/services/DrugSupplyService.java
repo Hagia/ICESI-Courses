@@ -44,4 +44,15 @@ public class DrugSupplyService {
 		}
 		return lis;
 	}
+
+	public List<DrugSupply> findAll() {
+		// TODO Auto-generated method stub
+		Iterator<DrugSupply> iter = suppliesRepository.findAll().iterator();
+		List<DrugSupply> list = new ArrayList<DrugSupply>();
+		while(iter.hasNext()) {
+			list.add(iter.next());
+		}
+		
+		return list;
+	}
 }

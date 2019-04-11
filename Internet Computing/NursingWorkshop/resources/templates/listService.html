@@ -26,8 +26,10 @@
 						<td><input type="checkbox" th:checked="${service.dispatch}"></td>
 						<td th:text="${service.dispatchPlace}"></td>
 						<td th:text="${service.observation}"></td>
-						<td th:each="drug : ${service.supplies}"><span
-							th:text="${drug.name}"></span></td>
+						<td>
+							<span th:each="supply : ${service.supplies}" th:text="${supply.drug.name}"></span>
+							
+							</td>
 					</tr>
 				</tbody>
 			</table>

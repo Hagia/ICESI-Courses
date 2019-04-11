@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -12,16 +14,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 @Data
 @Entity
 @NoArgsConstructor
 @RequiredArgsConstructor
+@ToString
 public class Urgency {
 	@Id
-	private Long key;
-	@NonNull
-	private String id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	@NonNull
 	private Date date;
 	@NonNull
@@ -32,12 +35,12 @@ public class Urgency {
 	@NonNull
 	private String procedure;
 	@NonNull
-	private Boolean dispacth;
-	
+	private Boolean dispatch;
+
 	private String dispatchPlace;
 	@NonNull
 	private String observation;
-	
+
 	@OneToMany
 	private List<DrugSupply> supplies;
 

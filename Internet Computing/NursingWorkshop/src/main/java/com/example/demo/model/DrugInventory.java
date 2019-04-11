@@ -8,10 +8,11 @@ import javax.persistence.OneToOne;
 
 import lombok.Data;
 import lombok.NonNull;
+
 @Entity
 @Data
 public class DrugInventory {
-	
+
 	@Id
 	private Long id;
 	@NonNull

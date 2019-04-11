@@ -26,6 +26,6 @@ public class Drug {
 	private String useMode;
 	@NonNull
 	private String indications;
-	
+
 	private String warnings;
 }

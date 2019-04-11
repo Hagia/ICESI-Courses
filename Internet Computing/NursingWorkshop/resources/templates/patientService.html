@@ -5,8 +5,11 @@
 <title>Patient service</title>
 </head>
 <body>
+	<div class="page-header">
+			<h2>Patient Service</h2>
+		</div>
 	<div>
-		<form action="#">
+		<form action="#" th:action="@{saveService}" method="post">
 			<fieldset>
 				<legend>Service registration</legend>
 				<table>
@@ -15,9 +18,9 @@
 							<th>Patient
 							<th>General description
 							<th>Procedure
-							<th>Dispatch
 							<th>Location
 							<th>Observation
+							<th>Dispatch
 							<th>Drug supplied
 						</tr>
 					</thead>
@@ -27,19 +30,19 @@
 									<option th:each="patient : ${patients}"
 										th:text="${patient.name}" th:value="${patient.id}">
 							</select>
-							<td><input type=text>
-							<td><input type="text">
-							<td><input type="text">
-							<td><input type="text">
-							<td><input type="checkbox">
-							<td><select>
-									<option th:each="drug : ${drugs}" th:text="${drug.name}"
-										th:value="${drug.id}">
+							<td><input type=text th:field="${service.description}">
+							<td><input type="text" th:field="${service.procedure}">
+							<td><input type="text" th:field="${service.dispatchPlace}">
+							<td><input type="text" th:field="${service.observation}">
+							<td><input type="checkbox" th:filed="${service.dispatch}">
+							<td><select th:each="supply : ${supplies}" th:field="${service.supplies}">
+									<option th:value="${supply.id}"th:text="${supply}"></option>
+								</select>
 							</select>
 						</tr>
 					</tbody>
 				</table>
-				<button>Save</button>
+				<button type="submit">Save</button>
 			</fieldset>
 
 			<a href="#" th:href="@{/home}">Home page</a>

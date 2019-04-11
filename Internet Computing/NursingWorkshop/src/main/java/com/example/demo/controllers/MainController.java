@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.Query;
 import com.example.demo.model.Drug;
 import com.example.demo.model.DrugSupply;
 import com.example.demo.model.Patient;
@@ -70,22 +69,23 @@ public class MainController {
 		
 	}
 
-	@PostMapping("/loginDo")
+	@PostMapping("/perform_login")
 	public String login(Model model, @ModelAttribute User user) {
+		
+//		us.loadUserByUsername(user.getLogin());
+		
+//		User u = us.find(user.getLogin());
+//
+//		boolean correctLogin = u != null && user.getPassword().equals(u.getPassword());
+//		if (correctLogin) {
+//			return "home";
+//		}
 
-		User u = us.find(user.getLogin());
-
-		boolean correctLogin = u != null && user.getPassword().equals(u.getPassword());
-		if (correctLogin) {
-			return "drugDelivery";
-		}
-
-		return "login";
+		return "home";
 	}
 
 	@GetMapping("/home")
 	public String home(Model model) {
-		model.addAttribute("query", new Query());
 		return "home";
 	}
 
@@ -101,6 +101,7 @@ public class MainController {
 
 	@GetMapping("/patientService")
 	public String patientService(Model model) {
+		model.addAttribute("supplies", dss.findAll());
 		model.addAttribute("patients", ps.findAll());
 		model.addAttribute("service", new Urgency());
 		return "patientService";
@@ -109,7 +110,6 @@ public class MainController {
 	@GetMapping("/query")
 	public String query(@RequestParam String option, @RequestParam String date, Model model) {
 
-		model.addAttribute("query", new Query());
 		Date dat = Date.valueOf(date);
 		if (option.equals("supply")) {
 			List<DrugSupply> list = dss.findAllByDate(dat);
@@ -118,7 +118,7 @@ public class MainController {
 		} else if (option.equals("service")) {
 			List<Urgency> list = ugs.findAllByDate(dat);
 			model.addAttribute("services", list);
-			return "patientService";
+			return "listService";
 		} else
 			return "home";
 	}
@@ -134,25 +134,20 @@ public class MainController {
 	}
 
 	@PostMapping("/saveService")
-	public String saveService(Model model, @ModelAttribute Urgency drugSupply) {
+	public String saveService(Model model, @ModelAttribute Urgency service) {
 		Calendar c = Calendar.getInstance();
 		Date date = new Date(c.get(Calendar.YEAR)-1900, c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
 		
-		drugSupply.setDate(date);
-		ugs.create(drugSupply);
+		System.out.println(service.toString());
+		service.setDate(date);
+		ugs.create(service);
 		return "home";
 	}
 
 	
-	@GetMapping("/")
-	public ModelAndView main() {
-		setUp();
-
-		User user = new User();
-		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("user", user);
-		mav.setViewName("login");
-		return mav;
+	@GetMapping("/login")
+	public String login(Model model) {
+//		model.addAttribute("user", new User());
+		return "login";
 	}
 }

@@ -9,12 +9,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Entity
 public class User {
-	
+
 	@Id
 	@NonNull
 	private String login;
@@ -26,5 +27,10 @@ public class User {
 	private String password;
 	@NonNull
 	private Boolean status;
+	
+	public User(String login, String password) {
+		this.login = login;
+		this.password = password;
+	}
 
 }
