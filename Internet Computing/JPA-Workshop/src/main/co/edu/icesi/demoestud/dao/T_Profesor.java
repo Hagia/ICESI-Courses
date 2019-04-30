@@ -5,8 +5,13 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Repository;
+
 import co.edu.icesi.demoestud.model.TProfesore;
 
+@Repository
+@Scope("singleton")
 public class T_Profesor implements IT_Profesor{
 	
 	@PersistenceContext

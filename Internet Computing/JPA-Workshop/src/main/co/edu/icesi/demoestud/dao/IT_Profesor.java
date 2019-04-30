@@ -2,6 +2,7 @@ package co.edu.icesi.demoestud.dao;
 
 import java.util.List;
 
+
 import co.edu.icesi.demoestud.model.TProfesore;
 
 public interface IT_Profesor {

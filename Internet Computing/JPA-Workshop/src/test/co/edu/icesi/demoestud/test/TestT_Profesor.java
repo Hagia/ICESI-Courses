@@ -1,16 +1,22 @@
 package co.edu.icesi.demoestud.test;
 
+
 import static org.junit.Assert.assertNotNull;
 
-import javax.transaction.Transactional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.demoestud.dao.IT_Profesor;
-import co.edu.icesi.demoestud.dao.T_Profesor;
+import co.edu.icesi.demoestud.model.TProfesore;
 
-@RunWith(SpringJ)
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/applicationContext.xml")
 @Rollback(false)
 public class TestT_Profesor {
@@ -22,13 +28,13 @@ public class TestT_Profesor {
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void aTest() {
 
-		assertNotNull(talumnoDao);
+		assertNotNull(profesorDAO);
 
-		TAlumno talumno = new TAlumno();
-		talumno.setNombre("Jack");
-		talumno.setApellidos("Bauer");
+		TProfesore tprofesor = new TProfesore();
+		tprofesor.setNombre("Jack");
+		tprofesor.setApellidos("Bauer");
 
-		talumnoDao.save(talumno);
+		profesorDAO.save(tprofesor);
 
 	}
 
@@ -36,12 +42,12 @@ public class TestT_Profesor {
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void bTest() {
 
-		assertNotNull(talumnoDao);
+		assertNotNull(profesorDAO);
 
-		T_Profesor alumno = talumnoDao.findById(2);
+		TProfesore alumno = profesorDAO.findById("2");
 		assertNotNull("Code not found", alumno);
 		alumno.setApellidos("JK");
-		talumnoDao.update(alumno);
+		profesorDAO.edit(alumno);
 
 	}
 
@@ -49,11 +55,11 @@ public class TestT_Profesor {
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void cTest() {
 
-		assertNotNull(talumnoDao);
+		assertNotNull(profesorDAO);
 
-		TAlumno talumno = talumnoDao.findById(2);
-		assertNotNull("Code not found", talumno);
-		talumnoDao.delete(talumno);
+		TProfesore tprofesor = profesorDAO.findById("2");
+		assertNotNull("Code not found", tprofesor);
+		profesorDAO.delete(tprofesor);
 
 	}
 }
