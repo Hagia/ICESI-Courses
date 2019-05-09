@@ -59,8 +59,8 @@ public class PatientDAO implements IPatientDAO{
 			.append("from Patient p ")
 			.append("where count(p.identification)>=2 ")
 			.append("( select * ")
-			.append("from DrugSupply ds ")
-			.append("where p.identification=ds.patient)");
+			.append("from Urgency ds ")
+			.append("where p.id=ds.patient)");
 		return manager.createQuery(sb.toString()).getResultList();
 	}
 

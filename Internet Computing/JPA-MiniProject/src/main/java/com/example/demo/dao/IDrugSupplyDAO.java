@@ -13,7 +13,7 @@ public interface IDrugSupplyDAO {
 
 	void delete(DrugSupply patient);
 
-	DrugSupply get(String id);
+	DrugSupply get(Long id);
 
 	List<DrugSupply> findByAmountRange(int min, int max);
 

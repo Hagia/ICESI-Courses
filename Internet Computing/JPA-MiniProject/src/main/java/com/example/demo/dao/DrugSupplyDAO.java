@@ -57,7 +57,7 @@ public class DrugSupplyDAO implements IDrugSupplyDAO{
 	}
 
 	@Override
-	public DrugSupply get(String id) {
+	public DrugSupply get(Long id) {
 		// TODO Auto-generated method stub
 		return manager.find(DrugSupply.class, id);
 	}

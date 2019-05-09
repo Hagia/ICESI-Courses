@@ -38,6 +38,9 @@ public class TestPatientDAO {
 
 	@Autowired
 	private IPatientDAO patientDAO;
+	
+	@Autowired
+	private IUrgencyDAO urgencyDAO;
 
 	@Test
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)

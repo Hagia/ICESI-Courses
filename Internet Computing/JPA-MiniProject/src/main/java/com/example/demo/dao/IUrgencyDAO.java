@@ -14,7 +14,7 @@ public interface IUrgencyDAO {
 
 	void delete(Urgency urgency);
 
-	Urgency get(String id);
+	Urgency get(Long id);
 
 	List<Urgency> findByDateRange(Date start, Date end);
 

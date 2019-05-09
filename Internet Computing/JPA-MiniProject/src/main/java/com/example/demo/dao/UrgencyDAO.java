@@ -37,7 +37,7 @@ public class UrgencyDAO implements IUrgencyDAO{
 	}
 
 	@Override
-	public Urgency get(String id) {
+	public Urgency get(Long id) {
 		// TODO Auto-generated method stub
 		return manager.find(Urgency.class, id);
 	}
@@ -46,10 +46,11 @@ public class UrgencyDAO implements IUrgencyDAO{
 	public List<Urgency> findByDateRange(Date start, Date end) {
 		// TODO Auto-generated method stub
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT *")
-			.append("FROM urgencies u")
-			.append("WHERE u.date>=" + start)
-			.append("AND u.date<=" + end);
+		sb.append("SELECT u ")
+			.append("FROM Urgency u ")
+			.append("WHERE u.date ")
+			.append("BETWEEN '" + start + "'")
+			.append(" AND '" + end + "'");
 		return manager.createQuery(sb.toString()).getResultList();
 	}
 
