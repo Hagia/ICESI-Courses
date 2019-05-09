@@ -102,7 +102,6 @@ public class TestUrgencyDAO {
 		assertNotNull("Code not found", urgency);
 
 		urgencyDAO.delete(urgency);
-
 	}
 
 	@Test
