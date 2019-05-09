@@ -57,7 +57,6 @@ public class TestUrgencyDAO {
 
 			patientDAO.save(p1);
 			patientDAO.save(p2);
-
 		}
 	}
 
