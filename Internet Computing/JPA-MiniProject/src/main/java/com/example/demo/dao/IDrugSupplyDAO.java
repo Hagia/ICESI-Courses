@@ -15,7 +15,7 @@ public interface IDrugSupplyDAO {
 
 	DrugSupply get(String id);
 
-	DrugSupply findByAmountRange(int min, int max);
+	List<DrugSupply> findByAmountRange(int min, int max);
 
 	List<DrugSupply> findAllScarcing();
 

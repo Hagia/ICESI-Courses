@@ -1,46 +1,58 @@
 package com.example.demo.dao;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Repository;
+
 import com.example.demo.model.Urgency;
 
+@Repository
+@Scope("singleton")
 public class UrgencyDAO implements IUrgencyDAO{
 	
 	@PersistenceContext
 	private EntityManager manager;
 
 	@Override
-	public void save(Urgency patient) {
+	public void save(Urgency urgency) {
 		// TODO Auto-generated method stub
-		
+		manager.persist(urgency);
 	}
 
 	@Override
-	public void update(Urgency patient) {
+	public void update(Urgency urgency) {
 		// TODO Auto-generated method stub
-		
+		manager.merge(urgency);
 	}
 
 	@Override
-	public void delete(Urgency patient) {
+	public void delete(Urgency urgency) {
 		// TODO Auto-generated method stub
-		
+		manager.remove(urgency);
 	}
 
 	@Override
 	public Urgency get(String id) {
 		// TODO Auto-generated method stub
-		return null;
+		return manager.find(Urgency.class, id);
 	}
 
 	@Override
-	public Urgency findByDateRange(Date start, Date end) {
+	public List<Urgency> findByDateRange(Date start, Date end) {
 		// TODO Auto-generated method stub
-		return null;
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT *")
+			.append("FROM urgencies u")
+			.append("WHERE u.date>=" + start)
+			.append("AND u.date<=" + end);
+		return manager.createQuery(sb.toString()).getResultList();
 	}
+
 	
 	
 	

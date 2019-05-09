@@ -1,20 +1,21 @@
 package com.example.demo.dao;
 
 import java.sql.Date;
+import java.util.List;
 
 import com.example.demo.model.Patient;
 import com.example.demo.model.Urgency;
 
 public interface IUrgencyDAO {
 
-	void save(Urgency patient);
+	void save(Urgency urgency);
 
-	void update(Urgency patient);
+	void update(Urgency urgency);
 
-	void delete(Urgency patient);
+	void delete(Urgency urgency);
 
 	Urgency get(String id);
 
-	Urgency findByDateRange(Date start, Date end);
+	List<Urgency> findByDateRange(Date start, Date end);
 
 }
