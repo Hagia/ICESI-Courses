@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -30,8 +31,8 @@ public class Urgency {
 	private Date date;
 	
 	@NonNull
-	@OneToOne
-	private Patient pacient;
+	@ManyToOne
+	private Patient patient;
 	
 	@OneToMany
 	private List<DrugSupply> supplies;

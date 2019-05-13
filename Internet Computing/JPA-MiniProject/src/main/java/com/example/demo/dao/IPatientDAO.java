@@ -24,4 +24,8 @@ public interface IPatientDAO {
 	List<Patient> findAllByName(String name, String sortingCriteria);
 
 	List<Patient> findAllTwoUrgencies();
+
+	List<Patient> findAllByDocument(String document);
+	
+	List countUrgencies();
 }

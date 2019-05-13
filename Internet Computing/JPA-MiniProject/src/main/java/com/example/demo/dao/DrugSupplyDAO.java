@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.model.Drug;
 import com.example.demo.model.DrugSupply;
 
 @Repository
@@ -29,12 +30,13 @@ public class DrugSupplyDAO implements IDrugSupplyDAO{
 	}
 
 	@Override
-	public List<DrugSupply> findAllScarcing() {
+	public List<Drug> findAllScarcing() {
 		// TODO Auto-generated method stub
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT *")
-			.append("FROM drugSupplies ds")
-			.append("WHERE ds.amount<=10");
+		sb.append("SELECT d")
+			.append("FROM DrugSupply ds, Drug d")
+			.append("WHERE ds.amount<=10 ")
+			.append("AND d.id=ds.drug");
 		return manager.createQuery(sb.toString()).getResultList();
 	}
 

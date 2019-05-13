@@ -2,6 +2,7 @@ package com.example.demo.dao;
 
 import java.util.List;
 
+import com.example.demo.model.Drug;
 import com.example.demo.model.DrugSupply;
 import com.example.demo.model.Patient;
 
@@ -17,6 +18,6 @@ public interface IDrugSupplyDAO {
 
 	List<DrugSupply> findByAmountRange(int min, int max);
 
-	List<DrugSupply> findAllScarcing();
+	List<Drug> findAllScarcing();
 
 }

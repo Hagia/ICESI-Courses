@@ -115,7 +115,7 @@ public class TestDrugSupplyDAO {
 	public void testFindAllScarcing() {
 		assertNotNull(drugSupplyDAO);
 
-		List<DrugSupply> list = drugSupplyDAO.findAllScarcing();
+		List<Drug> list = drugSupplyDAO.findAllScarcing();
 
 		assertEquals(0, list.size());
 	}

@@ -67,7 +67,7 @@ public class TestUrgencyDAO {
 
 		Urgency urgency = new Urgency();
 		urgency.setDate(new Date(System.currentTimeMillis()));
-		urgency.setPacient(patientDAO.get(Long.parseLong("1")));
+		urgency.setPatient(patientDAO.get(Long.parseLong("1")));
 		urgency.setDescription("ND");
 		urgency.setProcedure("ND");
 		urgency.setDispatch(Boolean.TRUE);
@@ -86,7 +86,7 @@ public class TestUrgencyDAO {
 		
 		assertNotNull("Code not found", urgency);
 
-		urgency.setPacient(patientDAO.get(Long.parseLong("2")));
+		urgency.setPatient(patientDAO.get(Long.parseLong("2")));
 
 		urgencyDAO.update(urgency);
 	}

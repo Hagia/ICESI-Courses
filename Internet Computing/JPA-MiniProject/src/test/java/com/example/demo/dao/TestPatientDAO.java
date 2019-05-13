@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
@@ -26,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.model.DrugSupply;
 import com.example.demo.model.Patient;
+import com.example.demo.service.InitService;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -38,39 +40,16 @@ public class TestPatientDAO {
 
 	@Autowired
 	private IPatientDAO patientDAO;
-	
-	@Autowired
-	private IUrgencyDAO urgencyDAO;
 
+	@Autowired
+	private InitService init;
+
+	/**
+	 * 
+	 */
 	@Test
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public void testASave() {
-
-		assertNotNull(patientDAO);
-
-		Patient patient1 = new Patient();
-
-		patient1.setName("Mauricio");
-		patient1.setIdentification("1234");
-		patient1.setProgram("SIS");
-		patient1.setLastName("Hernández");
-		patient1.setStatus(Boolean.TRUE);
-
-		Patient patient2 = new Patient();
-		
-		patient2.setName("Mauricio");
-		patient2.setIdentification("12364");
-		patient2.setProgram("SIS");
-		patient2.setLastName("Hernández");
-		patient2.setStatus(Boolean.TRUE);
-		
-		patientDAO.save(patient2);
-		patientDAO.save(patient1);
-	}
-
-	@Test
-	@Transactional(readOnly=false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public void testBMerge() {
+	public void testMerge() {
 
 		assertNotNull(patientDAO);
 
@@ -83,43 +62,91 @@ public class TestPatientDAO {
 		patientDAO.update(patient);
 	}
 
+	/**
+	 * 
+	 */
 	@Test
-	@Transactional(readOnly=false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public void testDFindAllByName() {
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void testFindAllByName() {
 		List<Patient> all = patientDAO.findAllByName("Mauricio");
-		
+
 		assertEquals(2, all.size());
-		
+
+		all = patientDAO.findAllByName("Miguel");
+
+		assertEquals(1, all.size());
+
+		all = patientDAO.findAllByName("Alejandro");
+
+		assertEquals(1, all.size());
+
 	}
 
+	/**
+	 * 
+	 */
 	@Test
-	@Transactional(readOnly=false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public void testEFindAllByLastname() {
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void testFindAllByLastname() {
 		List<Patient> all = patientDAO.findAllByLastname("Hernández");
 		assertEquals(2, all.size());
+		
+		all = patientDAO.findAllByLastname("Sánchez");
+		assertEquals(2, all.size());
+
+		all = patientDAO.findAllByLastname("Muñoz");
+		assertEquals(2, all.size());
 	}
 
 	@Test
-	@Transactional(readOnly=false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public void testFFindAllByNameSorted() {
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void testFindAllByDocument() {
+		assertNotNull(patientDAO);
+
+		List<Patient> all = patientDAO.findAllByDocument("123");
+
+		assertEquals(1, all.size());
+		
+		all = patientDAO.findAllByDocument("456");
+
+		assertEquals(1, all.size());
+		
+		all = patientDAO.findAllByDocument("789");
+
+		assertEquals(1, all.size());
+	}
+
+	@Test
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void testFindAllByNameSorted() {
 		List<Patient> all = patientDAO.findAllByName("Mauricio", "id");
 		assertEquals(2, all.size());
-		
-		assertEquals(1, all.get(0).getId().intValue());
-		assertEquals(2, all.get(1).getId().intValue());
-		
+
+		assertEquals("123", all.get(0).getIdentification());
+		assertEquals("321", all.get(1).getIdentification());
+
 	}
 
 	@Test
-	@Transactional(readOnly=false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public void testGRemove() {
-	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void testRemove() {
+
 		assertNotNull(patientDAO);
-	
+
 		Patient patient = patientDAO.get(Long.parseLong("1"));
-	
+
 		assertNotNull("Code not found", patient);
-	
+
 		patientDAO.delete(patient);
+	}
+
+	@Test
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void testFindAllTwoUrgencies() {
+		assertNotNull(patientDAO);
+
+		List<Patient> list = patientDAO.findAllTwoUrgencies();
+
+		assertEquals(0, list.size());
 	}
 }
