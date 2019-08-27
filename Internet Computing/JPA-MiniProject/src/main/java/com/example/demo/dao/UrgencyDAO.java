@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
@@ -15,7 +16,7 @@ import com.example.demo.model.Urgency;
 @Scope("singleton")
 public class UrgencyDAO implements IUrgencyDAO{
 	
-	@PersistenceContext
+	@PersistenceContext(type=PersistenceContextType.EXTENDED)
 	private EntityManager manager;
 
 	@Override

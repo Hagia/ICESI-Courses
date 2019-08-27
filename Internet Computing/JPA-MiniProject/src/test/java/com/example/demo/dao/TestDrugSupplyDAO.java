@@ -8,10 +8,14 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,9 +24,14 @@ import com.example.demo.model.Drug;
 import com.example.demo.model.DrugSupply;
 import com.example.demo.model.Patient;
 import com.example.demo.model.Urgency;
+import com.example.demo.service.InitService;
+
+import lombok.extern.log4j.Log4j2;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest
+@ContextConfiguration("/applicationContext.xml")
+@Rollback(false)
+@Log4j2
 public class TestDrugSupplyDAO {
 
 	@Autowired
@@ -30,57 +39,14 @@ public class TestDrugSupplyDAO {
 
 	@Autowired
 	private IPatientDAO patientDAO;
-
-	private Patient p1;
-
-	private Patient p2;
-
-	@Before
-	public void setup() {
-
-		if (p1 == null || p2 == null) {
-			p1 = new Patient();
-			p2 = new Patient();
-
-			p1.setName("Mauricio");
-			p1.setIdentification("1234");
-			p1.setProgram("SIS");
-			p1.setLastName("Hernández");
-			p1.setStatus(Boolean.TRUE);
-
-			p2.setName("Mauricio");
-			p2.setIdentification("12364");
-			p2.setProgram("SIS");
-			p2.setLastName("Hernández");
-			p2.setStatus(Boolean.TRUE);
-
-			patientDAO.save(p1);
-			patientDAO.save(p2);
-		}
-	}
-
-	@Test
-	public void testSave() {
-		assertNotNull(drugSupplyDAO);
-
-		Drug drug = new Drug("Acetaminofen", "Acetaminofen", "GENFAR", "2 per day", "No children");
-		DrugSupply drugSupply = new DrugSupply();
-
-		drugSupply.setAmount(15);
-		drugSupply.setDate(new Date(System.currentTimeMillis()));
-		drugSupply.setId("AC1");
-		drugSupply.setPatology("Gripe");
-		drugSupply.setDrug(drug);
-
-		drugSupplyDAO.save(drugSupply);
-	}
-
+	
 	@Test
 	public void testMerge() {
 		assertNotNull(drugSupplyDAO);
 		assertNotNull(patientDAO);
-
-		DrugSupply drugSupply = drugSupplyDAO.get(Long.parseLong("1"));
+		
+		
+		DrugSupply drugSupply = drugSupplyDAO.get(Long.parseLong("25"));
 
 		assertNotNull("Code not found", drugSupply);
 
@@ -94,13 +60,14 @@ public class TestDrugSupplyDAO {
 		assertNotNull(drugSupplyDAO);
 		assertNotNull(patientDAO);
 
-		DrugSupply drugSupply = drugSupplyDAO.get(Long.parseLong("1"));
+		DrugSupply drugSupply = drugSupplyDAO.get(Long.parseLong("26"));
 
 		assertNotNull("Code not found", drugSupply);
 
 		drugSupplyDAO.delete(drugSupply);
 	}
 
+	@Test
 	public void testFindByAmountRange() {
 		assertNotNull(drugSupplyDAO);
 
@@ -108,15 +75,16 @@ public class TestDrugSupplyDAO {
 
 		List<DrugSupply> list = drugSupplyDAO.findByAmountRange(min, max);
 
-		assertEquals(1, list.size());
+		assertEquals(2, list.size());
 
 	}
 
+	@Test
 	public void testFindAllScarcing() {
 		assertNotNull(drugSupplyDAO);
 
 		List<Drug> list = drugSupplyDAO.findAllScarcing();
 
-		assertEquals(0, list.size());
+		assertEquals(2, list.size());
 	}
 }

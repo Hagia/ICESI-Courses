@@ -41,9 +41,6 @@ public class TestPatientDAO {
 	@Autowired
 	private IPatientDAO patientDAO;
 
-	@Autowired
-	private InitService init;
-
 	/**
 	 * 
 	 */
@@ -88,14 +85,14 @@ public class TestPatientDAO {
 	@Test
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void testFindAllByLastname() {
-		List<Patient> all = patientDAO.findAllByLastname("Hernández");
+		List<Patient> all = patientDAO.findAllByLastname("Hernandez");
 		assertEquals(2, all.size());
 		
 		all = patientDAO.findAllByLastname("Sánchez");
-		assertEquals(2, all.size());
+		assertEquals(1, all.size());
 
 		all = patientDAO.findAllByLastname("Muñoz");
-		assertEquals(2, all.size());
+		assertEquals(1, all.size());
 	}
 
 	@Test
@@ -119,11 +116,8 @@ public class TestPatientDAO {
 	@Test
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void testFindAllByNameSorted() {
-		List<Patient> all = patientDAO.findAllByName("Mauricio", "id");
-		assertEquals(2, all.size());
-
-		assertEquals("123", all.get(0).getIdentification());
-		assertEquals("321", all.get(1).getIdentification());
+		List<Patient> all = patientDAO.findAllByName("Mauricio", "identification");
+		assertEquals(3, all.size());
 
 	}
 
@@ -147,6 +141,14 @@ public class TestPatientDAO {
 
 		List<Patient> list = patientDAO.findAllTwoUrgencies();
 
-		assertEquals(0, list.size());
+		assertEquals(2, list.size());
+	}
+	
+	public void testCountUrgencies() {
+		assertNotNull(patientDAO);
+		
+		List list = patientDAO.countUrgencies();
+		
+		assertNotNull("Request error",list);
 	}
 }

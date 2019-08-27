@@ -8,37 +8,37 @@ class Drools(KnowledgeEngine):
 
     @Rule(Ground(ph=P(lambda ph: ph == 7.2)))
     def rule_1(self):
-        yield Ground(PH="ALCALINO")
+        self.declare(Ground(PH="ALCALINO"))
         print("==> ph: ALCALINO")
     
     @Rule(Ground(ph=P(lambda ph: ph > 6.8) & P(lambda ph: ph < 7.2)))
     def rule_2(self):
-        yield Ground(PH="LIGERAMENTE ALCALINO")
+        self.declare(Ground(PH="LIGERAMENTE ALCALINO"))
         print("==> ph: LIGERAMENTE ALCALINO")
 
     @Rule(Ground(ph=P(lambda ph: ph<=6.8) & P(lambda ph: ph>= 6.2)))
     def rule_3(self):
-        yield Ground(PH="NEUTRO")
+        self.declare(Ground(PH="NEUTRO"))
         print("==> ph: NEUTRO")
 
     @Rule(Ground(ph=P(lambda ph: ph>5.6) & P(lambda ph: ph<6.2)))
     def rule_4(self):
-        yield Ground(PH="LIGERAMENTE ACIDO")
+        self.declare(Ground(PH="LIGERAMENTE ACIDO"))
         print("==> ph: LIGERAMENTE ACIDO")
 
     @Rule(Ground(ph=P(lambda ph: ph <= 5.6)))
     def rule_5(self):
-        yield Ground(PH="ACIDO")
+        self.declare(Ground(PH="ACIDO"))
         print("==> ph: ACIDO")
 
     @Rule(Ground(ce=P(lambda ce: ce < 0.8)))
     def rule_6(self):
-        yield Ground(CE="BAJA")
+        self.declare(Ground(CE="BAJA"))
         print("==> conductividadElectrica: BAJA")
 
     @Rule(Ground(ce=P(lambda ce: ce >= 0.8)))
     def rule_7(self):
-        yield Ground(CE="ALTA")
+        self.declare(Ground(CE="ALTA"))
         print("==> conductividadElectrica: ALTA")
 
     @Rule(Ground(PH=L("ALCALINO")))
@@ -453,7 +453,6 @@ class Drools(KnowledgeEngine):
 
 engine = Drools()
 engine.reset()
-engine.declare(Ground(PH=choice(["ALCALINO"])))
-engine.declare(Ground(CE=choice(["ALTA"])))
-engine.declare(Ground(arcilla=choice([40.0])))
+engine.declare(Ground(ph=choice([7.2])))
+
 engine.run()
