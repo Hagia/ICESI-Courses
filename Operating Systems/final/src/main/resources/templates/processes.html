@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+    <script>
+        function toggleAndEdit(_this) {
+            if(_this.style.backgroundColor == "lightgray"){
+                _this.style.backgroundColor = "red";
+            }else if(_this.style.backgroundColor == "red"){
+                _this.style.backgroundColor = "lightgray";
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+    <h1>Server manager</h1>
+
+    <div>
+        <button type="button">List processes</button>
+    </div>
+    <div>
+       <form id="form" action="#" th:action="@{/processes/delete}" th:object="${stopList}">
+        <table>
+            <tr>
+                <th th:each="columnName : ${#strings.arraySplit(header, ',')}" th:text="${columnName}"></th>
+            </tr>
+            <tr th:each= "process, index : ${processes}">
+                <td th:each= "column : ${#strings.arraySplit(process, ',')}" th:text="${column}"></td>
+                <td>
+                    <input type="checkbox" id="index" th:placeholder="${stopList[index].stop}" onClick="toggleAndEdit(this)" style="background-color:lightgray;" >
+                </td>
+            </tr>
+        </table>
+       </form>
+    </div>
+</body>
+</html>
