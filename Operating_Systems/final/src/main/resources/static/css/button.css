@@ -1,0 +1,25 @@
+.custom {
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #60a3bc;
+    padding: 20px;
+    border-radius: 50px;
+    display: inline-block;
+    border: none;
+    margin: 10px;
+    transition: all 0.4s ease 0s;
+}
+
+.custom1 {
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #797e80;
+    padding: 20px;
+    border-radius: 50px;
+    display: inline-block;
+    border: none;
+    margin: 10px;
+    transition: all 0.4s ease 0s;
+}

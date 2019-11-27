@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Server manager</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{css/util.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/button.css}">
+
+    <script src='main.js'></script>
+    <script>
+        function toggleAndEdit(_this) {
+            if (_this.style.backgroundColor == "lightgray") {
+                _this.style.backgroundColor = "red";
+
+            } else if (_this.style.backgroundColor == "red") {
+                _this.style.backgroundColor = "lightgray";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Server manager</h1>
+
+    <div>
+        <form action="#" th:action="@{//localhost:8080/processes/list}">
+            <button type="Submit" class="custom">List processes
+        </form>
+    </div>
+    <div th:if="${header != 'null'}">
+        <form id="form" action="#" th:action="@{/processes/stop}" th:object="${list}" method="POST">
+            <button type="submit" class="custom1">Stop selected processes</button>
+
+            <div class="limiter">
+                <div class="container-table100">
+                    <div class="wrap-table100">
+                        <div class="table100 ver1 m-b-110">
+                            <table>
+                                <tr>
+                                    <th class="cell100 column1" th:each="columnName : ${#strings.arraySplit(header, ',')}" th:text="${columnName}">
+
+                                    </th>
+                                    <th class="cell100 column4" th:text="Select">
+
+                                    </th>
+                                </tr>
+                                <tr class="row100 body" th:each="process, itemStat : ${processes}">
+                                    <td class="cell100 column1" th:each="column : ${#strings.arraySplit(process, ',')}" th:text="${column}">
+
+                                    </td>
+                                    <td class="cell100 column2">
+                                        <input type="checkbox" th:field="*{stopList[__${itemStat.index}__].stop}" onClick="toggleAndEdit(this)" style="background-color:lightgray;">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script>
+        $('.js-pscroll').each(function() {
+            var ps = new PerfectScrollbar(this);
+
+            $(window).on('resize', function() {
+                ps.update();
+            })
+        });
+    </script>
+
+    <!--===============================================================================================-->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

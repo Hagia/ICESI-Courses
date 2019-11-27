@@ -1,0 +1,1 @@
+ps -e -F | awk 'BEGIN{OFS=","} {print $2,$10,$11}' > ../data/pr.csv
